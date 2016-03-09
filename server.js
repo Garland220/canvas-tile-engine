@@ -123,7 +123,6 @@ io.on('connection', function(socket) {
       return;
     }
     map = maps[data.id-1];
-    console.log(map);
 
     map.tile_data = JSON.stringify(data.tile_data);
     map.name = data.name;
