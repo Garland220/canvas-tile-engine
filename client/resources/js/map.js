@@ -22,6 +22,7 @@ function Map(tileset) {
     server.send('load_map', true);
   }
 
+
   this.save = function() {
     server.send('save_map', JSON.stringify({
       id: this.id,
@@ -38,8 +39,8 @@ function Map(tileset) {
       y = grid.mouseY + grid.camera.y;
 
       this.tileData[y][x] = tile;
-
   }
+
 
   this.changeMusic = function(music) {
     this.music = music;
@@ -55,6 +56,8 @@ function Map(tileset) {
         this.play();
     }, false);
     this.audio.play();
+
+    window.dispatchEvent(new Event('changemusic'));
   },
 
   this.update = function(id, tileData, name, music) {
@@ -78,6 +81,8 @@ function Map(tileset) {
     this.tileData = tileData;
     this.width = this.tileData[0].length;
     this.height = this.tileData.length;
+
+    window.dispatchEvent(new Event('mapupdate'));
   }
 
   this.draw = function(canvas, startX, startY, endY, endX, zoom) {

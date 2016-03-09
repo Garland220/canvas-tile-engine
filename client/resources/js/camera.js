@@ -17,6 +17,7 @@ function Camera(map,canvas) {
       col = map.width;
     return col;
   };
+
   this.rows = function(){
     var row = Math.ceil(this.height() / (this.map.tileSize * this.zoom));
     if (row > map.height)

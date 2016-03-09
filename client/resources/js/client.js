@@ -90,6 +90,7 @@
         debug('scaling' + client.ratio)
       }
 
+      window.dispatchEvent(new Event('canvasinitialization'));
     },
 
 

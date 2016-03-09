@@ -39,7 +39,7 @@ function init() {
       window.AudioContext = window.AudioContext||window.webkitAudioContext;
       context = new AudioContext();
     }
-    catch(e) {
+    catch(exception) {
       alert('Web Audio API is not supported in this browser');
     }
   }
@@ -81,18 +81,7 @@ function loadTile(e) {
     columns = Math.ceil(width / 32);
 
   tile = Math.ceil(rows * columns)
-
-  // row = Math.floor(tile / columns);
-  // tile = tile - (row * columns);
-
-  // tile = Math.floor((deltaX) / 32);
-  // tile = Math.floor(tile / ((deltaX * deltaY)/32));
-
-  // tile_num = tile_y * num_tiles_x + tile_x
   tile = Math.floor(deltaY/32) * columns + Math.floor(deltaX/32);
-
-  console.log(Math.floor(deltaX/32), Math.floor(deltaY/32));
-  console.log(tile);
 }
 
 
@@ -131,6 +120,8 @@ function GameGrid(room){
   this.init = function() {
     this.update();
     this.draw();
+
+    window.dispatchEvent(new Event('gridinitialized'));
   }
 }
 
@@ -149,6 +140,7 @@ function initializeGame(canvas) {
     grid.update();
     grid.draw();
   }, 1000/FPS);
+  window.dispatchEvent(new Event('gameinitialized'));
 }
 
 function SpriteSheet(image){
@@ -243,14 +235,6 @@ function keyboardInput(event) {
   }
 
   grid.draw();   // draw map with new coordinates
-}
-
-function loopSound(sound) {
-  sound.play({
-    onfinish: function() {
-      loopSound(sound);
-    }
-  });
 }
 
 function roundNumber(num, dec) {

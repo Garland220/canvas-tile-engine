@@ -39,7 +39,7 @@ var Clients = [];
 io.on('connection', function(socket) {
   Clients.push(socket);
 
-  console.log('A user connected from %s', socket.address);
+  console.log('A user connected from %s', socket.handshake.address);
 
   socket.on('login', function() {
     console.log('User %s authenticated');
