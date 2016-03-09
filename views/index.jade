@@ -1,0 +1,51 @@
+doctype html
+
+html(lang="en")
+  head
+    title= title
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    link(rel="stylesheet", href="css/main.css", type="text/css", media="screen")
+  body
+    #wrapper
+      h1= version
+      .mapTitle test
+
+      canvas(id="gameScreen")
+        p Your browser does not support canvas
+      <br />
+      input(type='button', name='save', value='Save')
+      #tilesheet
+        img(src='img/tilesets/desert_2.png')
+
+    script(type='text/javascript', src='/socket.io/socket.io.js')
+
+    script(type='text/javascript', src='js/main.js')
+    script(type='text/javascript', src='js/client.js')
+    script(type='text/javascript', src='js/camera.js')
+    script(type='text/javascript', src='js/render.js')
+    script(type='text/javascript', src='js/map.js')
+    script(type='text/javascript', src='js/mobiles.js')
+    script(type='text/javascript', src='js/items.js')
+    script(type='text/javascript', src='js/server.js')
+
+
+//-       <div id="characterMaker" class="draggable">
+//-         <h3>Basics</h3>
+//-         <input id="character_firstname" name="character_firstname" placeholder="First Name" />
+//-         <input id="character_lastname" name="character_lastname" placeholder="Last Name" /><br />
+//-         <input id="character_gender" name="character_gender" placeholder="gender" />
+//-         <input id="character_age" name="character_age" placeholder="age" /><br />
+//-         <a href="#" id="background">Background</a><br />
+//-         <a href="#" id="stats">Send Debug Stats</a><br />
+
+//-         <br /><input type="submit" name="save_character" value="Save" />
+//-       </div>
+
+//-       <div id="backgroundViewer">
+//-         <h5 id="backgroundName">Background Name</h5>
+//-         <div id="backgroundDescription">Test</div>
+//-       </div>
+
+//-       <div id="output"></div>
+//-       <div id="chat"></div>
+//-     </div>

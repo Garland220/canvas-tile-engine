@@ -1,0 +1,121 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	overflow: hidden;
+	-webkit-font-smoothing: antialiased;
+	text-shadow: rgba(0,0,0,.01) 0 0 1px;
+}
+
+canvas {
+	background: #000;
+	overflow: hidden;
+	/*height: 600px;*/
+	/*height: 100%;*/
+	/*width: 100%;*/
+	image-rendering: pixelated;
+	cursor: crosshair;
+}
+
+#tilesheet {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0px;
+	background: rgba(0,0,0,0.4);
+	padding: 0px;
+}
+
+.mapTitle {
+	color: #fff;
+	opacity: 0;
+	transition: opacity .55s ease-in-out;
+	-moz-transition: opacity .55s ease-in-out;
+	-webkit-transition: opacity .55s ease-in-out;
+	display: none;
+	position: absolute;
+	padding: 10px;
+	font-size: 40px;
+	font-weight: 700;
+	text-shadow: -1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
+}
+
+#wrapper{
+	position: relative;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+#characterMaker{
+	background: rgba(255,255,255,0.9);
+	width: 315px;
+	height: 500px;
+	top: 10px;
+	left: 25%;
+	z-index: 10;
+	position: absolute;
+	padding: 10px;
+	border: 1px solid #ccc;
+	box-shadow: 0 0 3px #000;
+	display: none;
+}
+
+#characterMaker input{
+	margin-bottom: 5px;
+}
+
+#characterMaker textarea{
+	resize: none;
+	width: 311px;
+	height: 75px;
+}
+
+#backgroundViewer{
+	position:absolute;
+	top:0;
+	background: white;
+	padding: 10px;
+	display: none;
+}
+
+#output{
+	position:absolute;
+	top:0;
+	right:0;
+	background: rgba(0,0,0,0.8);
+	width: 150px;
+	color:#fff;
+	text-align: right;
+	padding: 10px;
+}
+
+#chat{
+	position:absolute;
+	bottom:0;
+	left:0;
+	width: 100%;
+	background: rgba(0,0,0,0.8);
+	color:#fff;
+	text-align: left;
+	padding: 5px;
+	height:100px;
+	line-height:5px;
+	font-size: 12px;
+	overflow-y: auto;
+	overflow-x: wrap;
+}
+
+.box{
+	z-index: 10;
+	padding: 10px;
+	position: absolute;
+	border: 1px solid #ccc;
+	box-shadow: 0 0 3px #000;
+	background: rgba(255,255,255,0.9);
+}
