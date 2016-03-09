@@ -20,6 +20,11 @@
         response = JSON.parse(response);
         grid.map.update(response.id, response.tile_data, response.name, response.music);
       });
+      server.socket.on('update_map', function(response){
+        console.log('Got updated map data')
+        response = JSON.parse(response);
+
+      });
 
       server.socket.emit('load_map');
 

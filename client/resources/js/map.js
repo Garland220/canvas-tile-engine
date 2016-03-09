@@ -58,15 +58,10 @@ function Map(tileset) {
     this.audio.play();
 
     window.dispatchEvent(new Event('changemusic'));
-  },
+  }
 
-  this.update = function(id, tileData, name, music) {
-    var title,
-      loopSkip = 5;
 
-    this.music = music;
-    this.changeMusic(this.music);
-
+  this.showTitle = function(title) {
     title = document.querySelector('.mapTitle')
     title.innerHTML = name;
     title.style.display = 'block';
@@ -75,6 +70,21 @@ function Map(tileset) {
         setTimeout(function() { title.style.display = 'none'; }, 250);
       }, 3500);
     }, 500);
+  }
+
+
+  this.update = function(id, tileData, name, music) {
+    var title,
+      loopSkip = 5;
+
+    this.music = music;
+
+    if (music != this.music) {
+      this.changeMusic(this.music);
+    }
+    if (name != this.name) {
+      this.showTitle(name);
+    }
 
     this.id = id;
     this.name = name
