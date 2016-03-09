@@ -59,8 +59,14 @@ function init() {
   canvas.addEventListener('click', mouseClick, false);
   document.getElementById('tilesheet').addEventListener('click', loadTile, false);
   document.getElementsByName('save')[0].addEventListener('click', save, false);
+  document.getElementsByName('bmg')[0].addEventListener('change', changeBMG, false);
 
   initializeGame(canvas);
+}
+
+function changeBMG(e) {
+  console.log(e.currentTarget.value)
+  grid.map.changeMusic(e.currentTarget.value);
 }
 
 function loadTile(e) {

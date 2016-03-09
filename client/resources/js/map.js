@@ -2,6 +2,7 @@ function Map(tileset) {
   this.id = 0;
   this.name = '';
   this.music = '';
+  this.audio;
   this.tileset = new SpriteSheet(client.getTile("desert_2.png"));
   this.tileSize = 32;
   this.tileData = [];
@@ -40,13 +41,28 @@ function Map(tileset) {
 
   }
 
+  this.changeMusic = function(music) {
+    this.music = music;
+
+    if (this.audio) {
+      this.audio.pause();
+      this.audio = undefined;
+    }
+
+    this.audio = new Audio('audio/' + this.music);
+    this.audio.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+    }, false);
+    this.audio.play();
+  },
+
   this.update = function(id, tileData, name, music) {
-    var audio,
-      title,
+    var title,
       loopSkip = 5;
 
     this.music = music;
-    audio = new Audio('audio/' + this.music);
+    this.changeMusic(this.music);
 
     title = document.querySelector('.mapTitle')
     title.innerHTML = name;
@@ -56,12 +72,6 @@ function Map(tileset) {
         setTimeout(function() { title.style.display = 'none'; }, 250);
       }, 3500);
     }, 500);
-
-    audio.addEventListener('ended', function() {
-        this.currentTime = loopSkip;
-        this.play();
-    }, false);
-    audio.play();
 
     this.id = id;
     this.name = name
