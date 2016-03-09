@@ -61,7 +61,7 @@ function Map(tileset) {
         this.currentTime = loopSkip;
         this.play();
     }, false);
-    // audio.play();
+    audio.play();
 
     this.id = id;
     this.name = name
