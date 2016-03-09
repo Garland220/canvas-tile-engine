@@ -64,12 +64,12 @@ function Map(tileset) {
 
 
   this.showTitle = function(title) {
-    title = document.querySelector('.mapTitle')
-    title.innerHTML = name;
-    title.style.display = 'block';
-    setTimeout(function() { title.style.opacity = 1;
-      setTimeout(function() { title.style.opacity = 0;
-        setTimeout(function() { title.style.display = 'none'; }, 250);
+    element = document.querySelector('.mapTitle')
+    element.innerHTML = title;
+    element.style.display = 'block';
+    setTimeout(function() { element.style.opacity = 1;
+      setTimeout(function() { element.style.opacity = 0;
+        setTimeout(function() { element.style.display = 'none'; }, 250);
       }, 3500);
     }, 500);
   }
@@ -79,10 +79,8 @@ function Map(tileset) {
     var title,
       loopSkip = 5;
 
-    this.music = music;
-
     if (music != this.music) {
-      this.changeMusic(this.music);
+      this.changeMusic(music);
     }
     if (name != this.name) {
       this.showTitle(name);
