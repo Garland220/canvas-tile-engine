@@ -33,8 +33,8 @@ function Map(tileset) {
 
 
   this.click = function() {
-    var x = grid.mouseX,
-      y = grid.mouseY;
+    var x = grid.mouseX + grid.camera.x,
+      y = grid.mouseY + grid.camera.y;
 
       this.tileData[y][x] = tile;
 
