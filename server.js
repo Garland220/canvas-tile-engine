@@ -1,12 +1,13 @@
-var util = require('util'),
+var version = '0.0.4',
+  util = require('util'),
   fs = require("fs"),
   express = require('express'),
   app = express(),
   http = require('http').Server(app),
   io = require('socket.io')(http),
   pg = require("pg"),
-  CONFIG = require('./settings.json'),
-  client = new pg.Client(CONFIG.conString);
+  SETTINGS = require('./settings.json'),
+  client = new pg.Client(SETTINGS.database);
 
 
 client.connect(function(error) {
@@ -16,20 +17,23 @@ client.connect(function(error) {
   }
 });
 
+
 app.set('view engine', 'jade');
 app.use(express.static('client/resources'));
 app.get('/', function(req, res){
   res.render('index', {
     title: 'ZK-Engine',
     header: 'Engine test',
-    'version': '0.0.2'
+    'version': version
   });
 });
+
 
 app.get('/map', function(req, res){
   res.setHeader('Content-Type', 'application/json');
   res.send();
 });
+
 
 var Clients = [];
 io.on('connection', function(socket) {
@@ -98,11 +102,9 @@ io.on('connection', function(socket) {
     console.log('User disconnected');
     // RemoveClient(client);
   });
-
-  // var db = new pg.Client(conString);
 });
 
 
-http.listen(8080, function(){
-  console.log('listening on *:8080');
+http.listen(SETTINGS.port, function(){
+  console.log('listening on *:'+SETTINGS.port);
 });
