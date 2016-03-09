@@ -38,7 +38,9 @@ function Map(tileset) {
     var x = grid.mouseX + grid.camera.x,
       y = grid.mouseY + grid.camera.y;
 
-      this.tileData[y][x] = tile;
+    this.tileData[y][x] = tile;
+
+    this.save();
   }
 
 
