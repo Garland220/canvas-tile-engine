@@ -1,23 +1,20 @@
 var util = require('util'),
-  format = require('string-format'),
+  fs = require("fs"),
   express = require('express'),
   app = express(),
   http = require('http').Server(app),
   io = require('socket.io')(http),
-  conString = "postgres://g@localhost/zko",
   pg = require("pg"),
-  client = new pg.Client(conString);
+  CONFIG = require('./settings.json'),
+  client = new pg.Client(CONFIG.conString);
+
 
 client.connect(function(error) {
-  if(error) {
+  if (error) {
     console.error(error);
+    return;
   }
 });
-
-// query = util.format('INSERT INTO map ("name", "tileData", "music") VALUES(\'%s\', \'%s\', \'%s\')', 'Desert', JSON.stringify(mapdata), 'caravan.ogg');
-// console.log(query);
-// client.query(query);
-
 
 app.set('view engine', 'jade');
 app.use(express.static('client/resources'));
