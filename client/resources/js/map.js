@@ -69,7 +69,7 @@ function Map(tileset) {
     element.style.display = 'block';
     setTimeout(function() { element.style.opacity = 1;
       setTimeout(function() { element.style.opacity = 0;
-        setTimeout(function() { element.style.display = 'none'; }, 250);
+        setTimeout(function() { element.style.display = 'none'; }, 700);
       }, 3500);
     }, 500);
   }
