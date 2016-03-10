@@ -60,6 +60,7 @@ function init() {
   document.getElementById('tilesheet').addEventListener('click', loadTile, false);
   // document.getElementsByName('save')[0].addEventListener('click', save, false);
   document.getElementsByName('bmg')[0].addEventListener('change', changeBMG, false);
+  document.getElementsByName('name')[0].addEventListener('blur', changeName, false);
 
   initializeGame(canvas);
 }
@@ -67,6 +68,11 @@ function init() {
 function changeBMG(e) {
   console.log(e.currentTarget.value)
   grid.map.changeMusic(e.currentTarget.value);
+}
+
+function changeName(e) {
+  console.log(e.currentTarget.value)
+  grid.map.name = e.currentTarget.value;
 }
 
 function loadTile(e) {
