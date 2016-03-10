@@ -105,8 +105,11 @@ function loadTile(e) {
 }
 
 
-function log(message, error) {
-  if (error == true) {
+function log(message, type) {
+  if (type == 1) {
+    console.warn(message)
+  }
+  else if (type == 2) {
     console.error(message);
   }
   else {
@@ -114,8 +117,10 @@ function log(message, error) {
   }
 }
 
-function debug(text){
-  log(text);
+function debug(text) {
+  if (DEBUG) {
+    log(text);
+  }
 }
 
 function GameGrid(room){

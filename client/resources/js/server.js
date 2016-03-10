@@ -9,19 +9,19 @@
 
 
     connect: function() {
-      log('<p class="event">Connecting...');
+      debug('Connecting...');
 
       server.socket = io();
       server.socket.on('chat', function(msg){
-        log(msg);
+        debug(msg);
       });
       server.socket.on('load_map', function(response){
-        console.log('Got new map data')
+        debug('Got new map data')
         response = JSON.parse(response);
         grid.map.update(response.id, response.tile_data, response.name, response.music);
       });
       server.socket.on('update_map', function(response){
-        console.log('Got updated map data')
+        debug('Got updated map data')
         response = JSON.parse(response);
 
       });
@@ -34,7 +34,7 @@
 
     disconnect: function() {
       server.socket.close();
-      log('Disconnected.');
+      debug('Disconnected.');
       window.dispatchEvent(new Event('disconnected'));
     },
 
