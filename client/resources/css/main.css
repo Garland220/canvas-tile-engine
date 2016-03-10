@@ -27,6 +27,7 @@ canvas {
 }
 
 .mapTitle {
+	box-sizing: border-box;
 	color: #fff;
 	opacity: 0;
 	transition: opacity .55s ease-in-out;
@@ -37,7 +38,11 @@ canvas {
 	padding: 10px;
 	font-size: 40px;
 	font-weight: 700;
-	text-shadow: -1px -1px 0 #000,
+	line-height: 40px;
+	background: rgba(0,0,0,0.4);
+	width: 800px;
+	text-shadow: 0 0 25px #fff,
+		-1px -1px 0 #000,
 		1px -1px 0 #000,
 		-1px 1px 0 #000,
 		1px 1px 0 #000;
