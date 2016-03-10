@@ -61,18 +61,32 @@ function init() {
   // document.getElementsByName('save')[0].addEventListener('click', save, false);
   document.getElementsByName('bmg')[0].addEventListener('change', changeBMG, false);
   document.getElementsByName('name')[0].addEventListener('blur', changeName, false);
+  window.addEventListener('mapupdate', updateName, false);
 
   initializeGame(canvas);
 }
 
 function changeBMG(e) {
-  console.log(e.currentTarget.value)
-  grid.map.changeMusic(e.currentTarget.value);
+  var val = e.currentTarget.value;
+
+  grid.map.changeMusic(val);
 }
 
 function changeName(e) {
-  console.log(e.currentTarget.value)
-  grid.map.name = e.currentTarget.value;
+  var val = e.currentTarget.value;
+
+  if (val != '') {
+    grid.map.name = val;
+  }
+}
+
+function updateName(e) {
+  var val = e.currentTarget.value;
+
+  console.log('test')
+
+  document.getElementsByName('name')[0].value = grid.map.name;
+  document.getElementsByName('bmg')[0].value = grid.map.music;
 }
 
 function loadTile(e) {
