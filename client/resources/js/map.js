@@ -1,4 +1,4 @@
-function Map(tileset) {
+function Map() {
   this.id = 0;
   this.name = '';
   this.music = '';
@@ -80,7 +80,7 @@ function Map(tileset) {
       loopSkip = 5;
 
     if (music != this.music) {
-      this.changeMusic(music);
+      // this.changeMusic(music);
     }
     if (name != this.name) {
       this.showTitle(name);
@@ -103,7 +103,7 @@ function Map(tileset) {
     endY = startY + endY;
     endX = startX + endX;
 
-    if (DEBUG){
+    if (DEBUG) {
       var nowTime = new Date();
       var diffTime = Math.ceil((nowTime.getTime() - lastTime.getTime()));
 
@@ -112,7 +112,13 @@ function Map(tileset) {
         fps = frameCount;
         frameCount = 0.0;
         lastTime = nowTime;
+        document.getElementById('fps').innerHTML = Math.floor(averageFPS)
       }
+      // debug(fps + " FPS<br />" + roundNumber(averageFPS,2) + " average FPS");
+      // debug("x:" + grid.camera.x + " y:" + grid.camera.y);
+      // debug("viewing: " + grid.camera.x + "-" + (grid.camera.x + grid.camera.columns()) + "/" + grid.camera.y + "-" + (grid.camera.y + grid.camera.rows()));
+
+      frameCount++;
     }
 
     for(var y=0;y<endY;y++){
@@ -134,15 +140,6 @@ function Map(tileset) {
     canvas.strokeRect(grid.mouseX * 32, grid.mouseY * 32, 32, 32);
 
     canvas.drawEntity(grid.player, this.tileSize * grid.camera.zoom);
-
-    if (DEBUG && false){
-      debug(fps + " FPS<br />" + roundNumber(averageFPS,2) + " average FPS");
-      debug("x:" + grid.camera.x + " y:" + grid.camera.y);
-      //debug("viewing: " + grid.camera.x + "-" + (grid.camera.x + grid.camera.columns()) + "/" + grid.camera.y + "-" + (grid.camera.y + grid.camera.rows()));
-      frameCount++;
-    }
-
-
 
     // canvas.fillStyle = "#000";
     // canvas.font = 'italic bold 30px sans-serif';

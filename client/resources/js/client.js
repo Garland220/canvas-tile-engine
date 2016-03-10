@@ -1,5 +1,3 @@
-'use strict';
-
 (function(global) {
   'use strict';
 
@@ -55,12 +53,12 @@
     },
 
 
-    initialize: function(canvas) {
+    initialize: function(canvas, columns, rows) {
       var devicePixelRatio = window.devicePixelRatio || 1,
         backingStoreRatio = 1;
 
-      canvas.width = 800;
-      canvas.height = 600;
+      canvas.width = columns * 32;
+      canvas.height = rows * 32;
       client.canvas.offsetX = canvas.offsetLeft;
       client.canvas.offsetY = canvas.offsetTop;
 

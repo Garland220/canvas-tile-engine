@@ -1,20 +1,21 @@
 
-function Camera(map,canvas) {
+function Camera(map, canvas) {
   this.x = 0;
   this.y = 0;
   this.zoom = 1.0;
 
   this.map = map;
 
-  // this.width = function() { return $("#gameScreen").width(); }
-  // this.height = function() { return $("#gameScreen").height(); }
-  this.width = function() { return 800; }
-  this.height = function() { return 600; }
+  this.width = function() { return columns * 32; }
+  this.height = function() { return rows * 32; }
 
   this.columns = function(){
     var col = Math.ceil(this.width() / (this.map.tileSize * this.zoom));
-    if (col > map.width)
+
+    if (col > map.width) {
       col = map.width;
+    }
+
     return col;
   };
 
@@ -33,11 +34,14 @@ function Camera(map,canvas) {
   //   ig.game.screen.y = this.pos.y;
   // },
 
-  this.draw = function(canvas){
+  this.draw = function(canvas, clear){
     if (!grid.active)
       return;
 
-    canvas.clearRect(0,0,width,height);
+    if (clear) {
+      canvas.clearRect(0, 0, this.width, this.height);
+    }
+
     this.map.draw(canvas, this.x, this.y, this.rows(), this.columns(), this.zoom);
   }
 

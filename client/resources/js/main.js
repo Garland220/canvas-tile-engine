@@ -14,6 +14,8 @@ var FPS = 32,
 
   height = 600,
   width = 800,
+  columns = 32,
+  rows = 20,
 
   grid = null,
   tile = 0;
@@ -61,9 +63,9 @@ function init() {
   // document.getElementsByName('save')[0].addEventListener('click', save, false);
   document.getElementsByName('bmg')[0].addEventListener('change', changeBMG, false);
   document.getElementsByName('name')[0].addEventListener('blur', changeName, false);
-  window.addEventListener('mapupdate', updateName, false);
+  window.addEventListener('mapupdate', updateMapFields, false);
 
-  initializeGame(canvas);
+  initializeGame(canvas, columns, rows);
 }
 
 function changeBMG(e) {
@@ -80,10 +82,8 @@ function changeName(e) {
   }
 }
 
-function updateName(e) {
+function updateMapFields(e) {
   var val = e.currentTarget.value;
-
-  console.log('test')
 
   document.getElementsByName('name')[0].value = grid.map.name;
   document.getElementsByName('bmg')[0].value = grid.map.music;
@@ -152,11 +152,10 @@ function GameGrid(room){
 
 function loadGrid(map){
   grid = new GameGrid(map);
-  //grid.x = $(cnv).offset();
 }
 
 function initializeGame(canvas) {
-  client.initialize(canvas);
+  client.initialize(canvas, columns, rows);
 
   loadGrid("map");
   grid.draw();
@@ -208,8 +207,6 @@ function mouseOver(e) {
 
   grid.mouseX = x;
   grid.mouseY = y;
-
-  // log(e);
 }
 
 function mouseWheel() {
