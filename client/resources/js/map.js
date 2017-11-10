@@ -3,10 +3,10 @@ function Map() {
   this.name = '';
   this.music = '';
   this.audio;
-  this.tileset = new SpriteSheet(client.getTile("desert_2.png"));
+  this.tileset = new SpriteSheet(client.getTile('desert_2.png'));
   this.tileSize = 32;
   this.tileData = [];
-  this.color = "#ccc";
+  this.color = '#ccc';
 
   this.width = 0;
   this.height = 0;

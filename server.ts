@@ -1,17 +1,17 @@
 var version = '0.0.4',
-  util = require('util'),
-  fs = require("fs"),
-  express = require('express'),
-  app = express(),
-  http = require('http').Server(app),
-  io = require('socket.io')(http),
-  pg = require("pg"),
-  SETTINGS = require('./settings.json'),
-  client = new pg.Client(SETTINGS.database),
-  users,
-  maps,
-  mobiles,
-  items;
+    util = require('util'),
+    fs = require('fs'),
+    express = require('express'),
+    app = express(),
+    http = require('http').Server(app),
+    io = require('socket.io')(http),
+    pg = require('pg'),
+    SETTINGS = require('./settings.json'),
+    client = new pg.Client(SETTINGS.database),
+    users,
+    maps,
+    mobiles,
+    items;
 
 
 client.connect(function(error) {
@@ -48,7 +48,7 @@ app.set('view engine', 'jade');
 app.use(express.static('client/resources'));
 app.get('/', function(req, res){
   res.render('index', {
-    title: 'ZK-Engine',
+    title: 'Engine',
     header: 'Engine test',
     'version': version
   });

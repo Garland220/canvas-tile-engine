@@ -1,7 +1,7 @@
 function Item() {
-  this.name = "Sample Item";
+  this.name = 'Sample Item';
   this.image = 'items_3.png';
-  this.sprite = new SpriteSheet(client.getSprite("items_3.png"));
+  this.sprite = new SpriteSheet(client.getSprite('items_3.png'));
   this.sprite.tileSize = 16;
   this.frame = 12;
   this.x = 0;

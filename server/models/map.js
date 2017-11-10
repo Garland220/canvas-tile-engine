@@ -1,10 +1,11 @@
-module.exports = function(db, cb)
-{
-    var Map = db.define('map', {
+module.exports = function(db, cb) {
+    let Map = db.define('map', {
       name: String,
-      music: String,
-      tileData: String,
+      properties: String, // JSON
+      tileData: String, // JSON
+      tileSet: String,
       lastVisited: Date,
       lastUpdate: Date,
+      version: Number
     }
 }

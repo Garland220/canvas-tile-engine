@@ -30,10 +30,10 @@
     },
 
     resources: {
-      base: "img/",
-      icons: "icons/",
-      tiles: "tilesets/",
-      sprites: "sprites/",
+      base: 'img/',
+      icons: 'icons/',
+      tiles: 'tilesets/',
+      sprites: 'sprites/',
 
       sprite: function(name) {
         return client.resources.base + client.resources.sprites + client.resources.getImage(name);
@@ -44,8 +44,8 @@
       },
 
       getImage: function(name) {
-        if (name.indexOf(".") == -1){
-          name = name + ".png";
+        if (name.indexOf('.') == -1){
+          name = name + '.png';
         }
 
         return name;

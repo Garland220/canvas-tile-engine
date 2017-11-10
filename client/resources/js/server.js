@@ -38,7 +38,7 @@
 
 
     send: function(type, data) {
-      if (data==""){
+      if (data === ''){
         debug('Please enter a message', 1);
         return false;
       }
@@ -51,7 +51,6 @@
         debug(exception, 2);
       }
     },
-
   };
 
 }(this));

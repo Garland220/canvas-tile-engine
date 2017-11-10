@@ -1,7 +1,7 @@
 'use strict';
 
 function Mobile() {
-  this.sprite = new SpriteSheet(client.getSprite("human_base.png"));
+  this.sprite = new SpriteSheet(client.getSprite('human_base.png'));
   this.direction = 0;
   this.frame = 1;
   this.maxFrames;
