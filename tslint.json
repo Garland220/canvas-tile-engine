@@ -1,0 +1,43 @@
+{
+  "rules": {
+    "new-parens": true,
+    "no-arg": true,
+    "no-var-keyword": true,
+    "no-consecutive-blank-lines": false,
+    "semicolon": [true,
+      "always",
+      "ignore-bound-class-methods"
+    ],
+    "type-operator-spacing": false,
+      "typedef-whitespace": [true,
+        {
+          "call-signature": "nospace",
+          "index-signature": "nospace",
+          "parameter": "nospace",
+          "property-declaration": "nospace",
+          "variable-declaration": "nospace"
+        },
+        {
+          "call-signature": "onespace",
+          "index-signature": "nospace",
+          "parameter": "nospace",
+          "property-declaration": "nospace",
+          "variable-declaration": "nospace"
+        }
+    ],
+    "indent": [true,
+      "spaces",
+      4
+    ],
+    "no-console": {
+      "options": [
+        "debug",
+        "info",
+        "log",
+        "time",
+        "timeEnd",
+        "trace"
+      ]
+    }
+  }
+}

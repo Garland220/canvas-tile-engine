@@ -3,13 +3,13 @@ import { Item } from './items/Item';
 
 
 export class Map {
-    public id: number;
-    public name: string;
+    public id:number;
+    public name:string;
     // public properties: propList;
     // public tiledata;
 
-    public mobiles: Mobile[];
-    public items: Item[];
+    public mobiles:Mobile[];
+    public items:Item[];
 
     constructor() {
 

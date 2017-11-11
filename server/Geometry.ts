@@ -1,30 +1,30 @@
 
 
 interface IShape {
-    Contains(point: Point3D): boolean;
+    Contains(point:Point3D): boolean;
 }
 
 export class Point2D {
-    private x: number;
-    private y: number;
+    private x:number;
+    private y:number;
 
-    public static readonly Zero: Point2D = new Point2D(0, 0);
+    public static readonly Zero:Point2D = new Point2D(0, 0);
 
     public get X(): number {
         return this.x;
     }
-    public set X(x: number) {
+    public set X(x:number) {
         this.x = x;
     }
 
     public get Y(): number {
         return this.Y;
     }
-    public set Y(y: number) {
+    public set Y(y:number) {
         this.y = y;
     }
 
-    constructor(x: number, y: number) {
+    constructor(x:number, y:number) {
         this.x = x;
         this.y = y;
     }
@@ -35,18 +35,18 @@ export class Point2D {
 }
 
 export class Point3D extends Point2D {
-    public z: number;
+    public z:number;
 
-    public static readonly Zero: Point3D = new Point3D(0, 0, 0);
+    public static readonly Zero:Point3D = new Point3D(0, 0, 0);
 
     public get Z(): number {
         return this.z;
     }
-    public set Z(z: number) {
+    public set Z(z:number) {
         this.z = z;
     }
 
-    constructor(x: number, y: number, z: number) {
+    constructor(x:number, y:number, z:number) {
         super(x, y);
         this.z = z;
     }
@@ -57,8 +57,8 @@ export class Point3D extends Point2D {
 }
 
 export class Rectangle2D implements IShape {
-    private start: Point2D;
-    private end: Point2D;
+    private start:Point2D;
+    private end:Point2D;
 
     public get Start(): Point2D {
         return this.start;
@@ -76,12 +76,12 @@ export class Rectangle2D implements IShape {
         return this.end.Y - this.end.Y;
     }
 
-    constructor(start: Point2D, end: Point2D) {
+    constructor(start:Point2D, end:Point2D) {
         this.start = start;
         this.end = end;
     }
 
-    public Contains(point: Point3D): boolean {
+    public Contains(point:Point3D): boolean {
         return (
             this.start.X <= point.X &&
             this.start.Y <= point.Y &&
@@ -92,8 +92,8 @@ export class Rectangle2D implements IShape {
 }
 
 export class Rectangle3D implements IShape {
-    private start: Point3D;
-    private end: Point3D;
+    private start:Point3D;
+    private end:Point3D;
 
     public get Width(): number {
         return this.end.X - this.start.X;
@@ -107,12 +107,12 @@ export class Rectangle3D implements IShape {
         return this.end.Z - this.start.Z;
     }
 
-    constructor(start: Point3D, end: Point3D) {
+    constructor(start:Point3D, end:Point3D) {
         this.start = start;
         this.end = end;
     }
 
-    public Contains(point: Point3D): boolean {
+    public Contains(point:Point3D): boolean {
         return (
             this.start.X <= point.X &&
             this.start.Y <= point.Y &&
@@ -125,9 +125,9 @@ export class Rectangle3D implements IShape {
 }
 
 export class Triangle implements IShape {
-    private point1: Point2D;
-    private point2: Point2D;
-    private point3: Point2D;
+    private point1:Point2D;
+    private point2:Point2D;
+    private point3:Point2D;
 
     public get Point1(): Point2D {
         return this.point1;
@@ -141,13 +141,13 @@ export class Triangle implements IShape {
         return this.point3;
     }
 
-    constructor(point1: Point2D, point2: Point2D, point3: Point2D) {
+    constructor(point1:Point2D, point2:Point2D, point3:Point2D) {
         this.point1 = point1;
         this.point2 = point2;
         this.point3 = point3;
     }
 
-    public Contains(point: Point3D): boolean {
+    public Contains(point:Point3D): boolean {
         let delta1 = new Point2D(
             this.point3.X - this.point1.X,
             this.point3.Y - this.point3.Y
@@ -161,7 +161,7 @@ export class Triangle implements IShape {
             point.Y - this.point1.Y
         );
 
-        let envelope: number[] = [
+        let envelope:number[] = [
             (delta1.X * delta1.X) + (delta1.Y * delta1.Y),
             (delta1.X * delta2.X) + (delta1.Y * delta2.Y),
             (delta1.X * delta3.X) + (delta1.Y * delta3.Y),
@@ -178,8 +178,8 @@ export class Triangle implements IShape {
 }
 
 export class Circle implements IShape {
-    private start: Point2D;
-    private radius: number;
+    private start:Point2D;
+    private radius:number;
 
     public get Center(): Point2D {
         return this.start;
@@ -189,12 +189,12 @@ export class Circle implements IShape {
         return this.radius;
     }
 
-    constructor(start: Point2D, radius: number) {
+    constructor(start:Point2D, radius:number) {
         this.start = start;
         this.radius = radius;
     }
 
-    public Contains(point: Point3D): boolean {
+    public Contains(point:Point3D): boolean {
         let dx = (point.X - this.start.X);
         let dy = (point.Y - this.start.Y);
 
