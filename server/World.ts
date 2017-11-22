@@ -1,53 +1,96 @@
 import { Mobile } from './mobiles/Mobile';
 import { Item } from './items/Item';
 
+class MobileHash {
+    [id: number]: Mobile;
+}
+
+class ItemHash {
+    [id: number]: Item;
+}
 
 export class World {
+    private static paused: boolean = false;
+
     // Dictionaries
-    private static mobiles:{ [id:number]:Mobile };
-    private static items:{ [id:number]:Item };
+    private static mobiles: MobileHash = {};
+    private static items: ItemHash = {};
 
-    public static get Mobiles(): { [id:number]:Mobile } {
-        return this.mobiles;
+    private static mobileCount: number = 0;
+    private static itemCount: number = 0;
+
+    public static get Mobiles(): MobileHash {
+        return World.mobiles;
     }
 
-    public static get Items(): { [id:number]:Item } {
-        return this.items;
+    public static get MobilesCount(): number {
+        return World.mobileCount;
     }
 
-    public static AddMobile(mobile:Mobile): void {
-        this.mobiles[mobile.ID] = mobile;
+    public static get MobilesArray(): Mobile[] {
+        return Object.keys(World.mobiles).map(function(mobileId: string) {
+            return World.mobiles[<any>mobileId];
+        });
     }
 
-    public static FindMobile(id:number): Mobile {
-        if (this.mobiles[id]) {
-            return this.mobiles[id];
+    public static get Items(): ItemHash {
+        return World.items;
+    }
+
+    public static get ItemsCount(): number {
+        return World.itemCount;
+    }
+
+    public static get ItemsArray(): Item[] {
+        return Object.keys(World.items).map(function(itemId: string) {
+            return World.items[<any>itemId];
+        });
+    }
+
+    public static AddMobile(mobile: Mobile): void {
+        if (!World.mobiles[mobile.ID]) {
+            World.mobiles[mobile.ID] = mobile;
+            World.mobileCount += 1;
+        }
+    }
+
+    public static RemoveMobile(mobile: Mobile): void {
+        if (World.mobiles[mobile.ID]) {
+            World.mobiles[mobile.ID] = null;
+            delete World.mobiles[mobile.ID];
+            World.mobileCount -= 1;
+        }
+    }
+
+    public static GetMobile(mobileId: number): Mobile {
+        if (World.mobiles[mobileId]) {
+            return World.mobiles[mobileId]
         }
 
         return null;
     }
 
-    public static RemoveMobile(mobile:Mobile): void {
-        this.mobiles[mobile.ID] = null;
-        delete this.mobiles[mobile.ID];
+    public static AddItem(item: Item): void {
+        if (!World.items[item.ID]) {
+            World.items[item.ID] = item;
+            World.itemCount += 1;
+        }
     }
 
-
-    public static AddItem(item:Item): void {
-        this.items[item.ID] = item;
+    public static RemoveItem(item: Mobile): void {
+        if (World.items[item.ID]) {
+            World.items[item.ID] = null;
+            delete World.mobiles[item.ID];
+            World.itemCount -= 1;
+        }
     }
 
-    public static FindItem(id:number): Item {
-        if (this.items[id]) {
-            return this.items[id];
+    public static GetItem(itemId: number): Item {
+        if (World.items[itemId]) {
+            return World.items[itemId]
         }
 
         return null;
-    }
-
-    public static RemoveItem(item:Mobile): void {
-        this.items[item.ID] = null;
-        delete this.mobiles[item.ID];
     }
 
     public static Broadcast(color:string, text:string): void {
@@ -67,11 +110,21 @@ export class World {
     //     NetState.FlushAll();
     }
 
+    public static Pause(): void {
+        World.paused = true;
+    }
+
+    public static Resume(): void {
+        World.paused = false;
+    }
+
     public static Save(): boolean {
+        World.Pause();
         return false;
     }
 
     public static Load(): boolean {
+        World.Pause();
         return false;
     }
 }
