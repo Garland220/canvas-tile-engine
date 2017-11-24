@@ -48,6 +48,10 @@ export class World {
   }
 
   public static AddMobile(mobile:Mobile): void {
+    if (!(mobile instanceof Mobile)) {
+      return;
+    }
+
     if (!World.mobiles[mobile.ID]) {
       World.mobiles[mobile.ID] = mobile;
       World.mobileCount += 1;
@@ -55,6 +59,10 @@ export class World {
   }
 
   public static RemoveMobile(mobile:Mobile): void {
+    if (!(mobile instanceof Mobile)) {
+      return;
+    }
+
     if (World.mobiles[mobile.ID]) {
       World.mobiles[mobile.ID] = null;
       delete World.mobiles[mobile.ID];
@@ -70,16 +78,24 @@ export class World {
   }
 
   public static AddItem(item:Item): void {
+    if (!(item instanceof Item)) {
+      return;
+    }
+
     if (!World.items[item.ID]) {
       World.items[item.ID] = item;
       World.itemCount += 1;
     }
   }
 
-  public static RemoveItem(item:Mobile): void {
+  public static RemoveItem(item:Item): void {
+    if (!(item instanceof Item)) {
+      return;
+    }
+
     if (World.items[item.ID]) {
       World.items[item.ID] = null;
-      delete World.mobiles[item.ID];
+      delete World.items[item.ID];
       World.itemCount -= 1;
     }
   }

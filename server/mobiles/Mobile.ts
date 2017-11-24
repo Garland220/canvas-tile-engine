@@ -10,6 +10,27 @@ export class Mobile extends Entity {
     super();
   }
 
+  public Delete(): void {
+    this.OnDelete();
+
+    // Cancel Trades
+    super.Delete();
+    // Remove Items
+    // Remove stabled pets
+
+    World.RemoveMobile(this);
+    this.OnAfterDelete();
+  }
+
+  public OnDelete(): void {
+
+
+  }
+
+  public OnAfterDelete(): void {
+
+  }
+
   public Move(direction:Direction) {
     let newLocation:Point3D = this.Location;
     let oldLocation:Point3D = newLocation;

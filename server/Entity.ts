@@ -1,9 +1,10 @@
 import { Point3D } from './Geometry';
 import { Map } from './Map';
+import { World } from './World';
 
 
 export interface IEntity {
-  ID:number;
+  id:number;
   Deleted:boolean;
   Visible:boolean;
   Location:Point3D;
