@@ -27,7 +27,7 @@
     ],
     "indent": [true,
       "spaces",
-      4
+      2
     ],
     "no-console": {
       "options": [
