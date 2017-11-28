@@ -1,8 +1,10 @@
 
 
 interface IShape {
+  Center: Point2D | Point3D;
   Contains(point:Point3D): boolean;
 }
+
 
 export class Point2D {
   private x:number;
@@ -34,6 +36,7 @@ export class Point2D {
   }
 }
 
+
 export class Point3D extends Point2D {
   public z:number;
 
@@ -56,6 +59,7 @@ export class Point3D extends Point2D {
   }
 }
 
+
 export class Rectangle2D implements IShape {
   private start:Point2D;
   private end:Point2D;
@@ -76,6 +80,13 @@ export class Rectangle2D implements IShape {
     return this.end.Y - this.end.Y;
   }
 
+  public get Center():Point2D {
+    return new Point2D(
+      this.start.X + (this.Width / 2),
+      this.start.Y + (this.Height / 2)
+    );
+  }
+
   constructor(start:Point2D, end:Point2D) {
     this.start = start;
     this.end = end;
@@ -91,6 +102,7 @@ export class Rectangle2D implements IShape {
   }
 }
 
+
 export class Rectangle3D implements IShape {
   private start:Point3D;
   private end:Point3D;
@@ -105,6 +117,14 @@ export class Rectangle3D implements IShape {
 
   public get Depth(): number {
     return this.end.Z - this.start.Z;
+  }
+
+  public get Center(): Point2D {
+    return new Point3D(
+      this.start.X + (this.Width / 2),
+      this.start.Y + (this.Height / 2),
+      this.start.Z + (this.Depth / 2)
+    );
   }
 
   constructor(start:Point3D, end:Point3D) {
@@ -124,6 +144,7 @@ export class Rectangle3D implements IShape {
   }
 }
 
+
 export class Triangle implements IShape {
   private point1:Point2D;
   private point2:Point2D;
@@ -141,6 +162,13 @@ export class Triangle implements IShape {
     return this.point3;
   }
 
+  public get Center(): Point2D {
+    return new Point2D(
+      (this.point1.X + this.point2.X + this.point3.X) / 3,
+      (this.point1.Y + this.point2.Y + this.point3.Y) / 3
+    );
+  }
+
   constructor(point1:Point2D, point2:Point2D, point3:Point2D) {
     this.point1 = point1;
     this.point2 = point2;
@@ -149,24 +177,24 @@ export class Triangle implements IShape {
 
   public Contains(point:Point3D): boolean {
     let delta1 = new Point2D(
-        this.point3.X - this.point1.X,
-        this.point3.Y - this.point3.Y
+      this.point3.X - this.point1.X,
+      this.point3.Y - this.point3.Y
     );
     let delta2 = new Point2D(
-        this.point2.X - this.point1.X,
-        this.point2.Y - this.point1.Y
+      this.point2.X - this.point1.X,
+      this.point2.Y - this.point1.Y
     );
     let delta3 = new Point2D(
-        point.X - this.point1.X,
-        point.Y - this.point1.Y
+      point.X - this.point1.X,
+      point.Y - this.point1.Y
     );
 
     let envelope:number[] = [
-        (delta1.X * delta1.X) + (delta1.Y * delta1.Y),
-        (delta1.X * delta2.X) + (delta1.Y * delta2.Y),
-        (delta1.X * delta3.X) + (delta1.Y * delta3.Y),
-        (delta2.X * delta2.X) + (delta2.Y * delta2.Y),
-        (delta2.X * delta3.X) + (delta2.Y * delta3.Y),
+      (delta1.X * delta1.X) + (delta1.Y * delta1.Y),
+      (delta1.X * delta2.X) + (delta1.Y * delta2.Y),
+      (delta1.X * delta3.X) + (delta1.Y * delta3.Y),
+      (delta2.X * delta2.X) + (delta2.Y * delta2.Y),
+      (delta2.X * delta3.X) + (delta2.Y * delta3.Y),
     ];
 
     let invDenom = 1 / (envelope[0] * envelope[3] - envelope[1] * envelope[1]);
@@ -176,6 +204,7 @@ export class Triangle implements IShape {
     return ((u >= 0) && (v >= 0) && (u + v < 1));
   }
 }
+
 
 export class Circle implements IShape {
   private start:Point2D;

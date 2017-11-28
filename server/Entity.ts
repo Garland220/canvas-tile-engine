@@ -4,7 +4,7 @@ import { World } from './World';
 
 
 export interface IEntity {
-  id:number;
+  ID:number;
   Deleted:boolean;
   Visible:boolean;
   Location:Point3D;
