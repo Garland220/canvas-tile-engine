@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "dependencies": {
+    "@types/socket.io": "^1.4.31",
     "express": "^4.13.4",
     "pg": "^4.4.4",
     "pluralize": "^1.2.1",
