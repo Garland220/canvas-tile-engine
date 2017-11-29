@@ -2,11 +2,12 @@ import * as SocketIO from 'socket.io';
 
 import { Account } from '../Account';
 import { Mobile } from '../mobiles/Mobile';
+import { IPAddress } from './IPAddress';
 
 
 export class NetState {
   private socket:SocketIO.Socket;
-  private address:string;
+  private address:IPAddress;
 
   private account:Account;
   private mobile:Mobile;

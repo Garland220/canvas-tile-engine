@@ -50,9 +50,9 @@ export interface ISpell {
 }
 
 export interface IParty {
-  OnStamChanged(mobile:Mobile): void;
-  OnManaChanged(mobile:Mobile): void;
-  OnStatsQuery(beholder:Mobile, beheld:Mobile): void;
+  OnStamChanged(mobile:Mobile):void;
+  OnManaChanged(mobile:Mobile):void;
+  OnStatsQuery(beholder:Mobile, beheld:Mobile):void;
 }
 
 export interface ISpawner {
