@@ -1,12 +1,13 @@
 import { Entity } from '../Entity';
-import { Direction } from '../Movement';
-import { Point3D } from '../Geometry';
-import { World } from '../World';
+import { Direction } from './Movement';
+import { Point3D } from '../world/Geometry';
+import { Map, Region, World } from '../world';
 
 
 export class Mobile extends Entity {
   private movementBlocked:boolean = false;
   private alive:boolean = false;
+  private region:Region;
 
   public get Alive():boolean {
     return this.alive;
@@ -16,18 +17,22 @@ export class Mobile extends Entity {
     return true;
   }
 
+  public get Region():Region {
+    return this.region;
+  }
+
   constructor() {
     super();
   }
 
   public Kill(): void {
-    if( !this.CanBeDamaged )
+    if(!this.CanBeDamaged)
       return;
-    else if( !this.Alive /*|| IsDeadBondedPet*/ )
+    else if(!this.Alive /*|| IsDeadBondedPet*/)
       return;
-    else if( this.Deleted )
+    else if(this.Deleted)
       return;
-    // else if( !Region.OnBeforeDeath( this ) )
+    // else if(!this.Region.OnBeforeDeath( this ))
       // return;
     else if( !this.OnBeforeDeath() )
       return;

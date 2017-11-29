@@ -1,6 +1,5 @@
-import { Point3D } from './Geometry';
-import { Map } from './Map';
-import { World } from './World';
+import { Map, World } from './world';
+import { Point3D } from './world/Geometry';
 
 
 export interface IEntity {

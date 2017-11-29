@@ -1,8 +1,7 @@
 import * as SocketIO from 'socket.io';
 
-import { Account } from '../Account';
-import { Mobile } from '../mobiles/Mobile';
-import { IPAddress } from './IPAddress';
+import { Account, Client } from '../user';
+import { Mobile } from '../mobile';
 
 
 export class NetState {

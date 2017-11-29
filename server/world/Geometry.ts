@@ -1,5 +1,4 @@
 
-
 interface IShape {
   Center: Point2D | Point3D;
   Contains(point:Point3D): boolean;

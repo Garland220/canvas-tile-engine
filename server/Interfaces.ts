@@ -1,9 +1,9 @@
-import { Map } from './Map';
-import { Mobile } from './mobiles/Mobile';
-import { Item } from './items/Item';
+import { Map } from './world';
 import { IEntity } from './Entity';
-import { Point3D } from './Geometry';
-import { Direction } from './Movement';
+import { Item } from './item';
+import { Mobile } from './mobile';
+import { Direction } from './mobile/Movement';
+import { Point3D } from './world/Geometry';
 
 
 export interface IMount {
@@ -20,7 +20,7 @@ export interface IVendor {
   // OnSellItems(from: Mobile, SellItemResponse[]): boolean;
   LastRestock:Date;
   RestockDelay:number;
-  Restock(): void;
+  Restock():void;
 }
 
 export interface ICarvable {

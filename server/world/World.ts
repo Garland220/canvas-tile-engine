@@ -1,5 +1,5 @@
-import { Mobile } from './mobiles/Mobile';
-import { Item } from './items/Item';
+import { Mobile } from '../mobile';
+import { Item } from '../item';
 
 class MobileHash {
   [id:number]:Mobile;

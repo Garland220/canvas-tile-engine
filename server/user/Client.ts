@@ -1,4 +1,4 @@
-import { Mobile } from './mobiles/Mobile';
+import { Mobile } from '../mobile';
 
 
 export class Client {

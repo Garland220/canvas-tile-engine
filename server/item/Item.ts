@@ -1,5 +1,5 @@
 import { Static } from './Static';
-import { Mobile } from '../mobiles/Mobile';
+import { Mobile } from '../mobile';
 
 
 export class Item extends Static {

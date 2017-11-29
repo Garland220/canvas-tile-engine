@@ -6,6 +6,7 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": true,
+        "typeRoots": ["./@types"],
         "outDir": "server/build/"
     },
     "include": [
