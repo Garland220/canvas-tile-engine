@@ -5,6 +5,7 @@ import { Map, Region, World } from '../world';
 
 
 export class Mobile extends Entity {
+  private isPlayer: boolean = false;
   private movementBlocked:boolean = false;
   private alive:boolean = false;
   private region:Region;
@@ -23,6 +24,10 @@ export class Mobile extends Entity {
 
   constructor() {
     super();
+  }
+
+  public IsPlayer():boolean {
+    return this.isPlayer;
   }
 
   public Kill(): void {
