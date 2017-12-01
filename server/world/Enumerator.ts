@@ -21,4 +21,8 @@ export class Enumerator {
     public static GetMobilesInRadius(map:Map, point:Point3D, radius:number) {
         Enumerator.GetMobilesInShape(map, new Circle(point, radius));
     }
+
+    public static GetItems(map:Map) {
+
+    }
 }

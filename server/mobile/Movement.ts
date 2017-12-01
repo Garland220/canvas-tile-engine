@@ -19,11 +19,11 @@ export enum Direction {
 }
 
 export class Movement {
-  public static CheckMovement(mobile:Mobile, map:Map, location:Point3D, direction:Direction): boolean {
+  public static CheckMove(mobile:Mobile, direction:Direction): boolean {
     return false;
   }
 
-  public static Offset(direction:Direction): Point2D {
+  public static GetOffset(direction:Direction): Point2D {
     let offset = new Point2D(0, 0);
 
     switch (direction) {
