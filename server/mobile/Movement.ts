@@ -1,6 +1,6 @@
+import { Mobile } from '../mobile';
 import { Map } from '../world';
 import { Point2D, Point3D } from '../world/Geometry';
-import { Mobile } from './mobile';
 
 
 export interface IMovementImpl {

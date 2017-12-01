@@ -1,5 +1,5 @@
-import { Map } from './Map';
-import { Point2D, Rectangle2D } from './Geometry';
+import { Map } from '../world';
+import { Point2D, Rectangle2D } from '../world/Geometry';
 
 export class Weather {
   private active:boolean = false;
@@ -38,7 +38,10 @@ export class Weather {
   }
 
   public ReCenter(point2D:Point2D):void {
+      // let halfLength = this.Bounds.Center;
 
+      // newPoint.X = point2D.X;
+      // newPoint.Y = point2D.Y;
   }
 
   public OnTick():void {

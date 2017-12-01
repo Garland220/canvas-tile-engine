@@ -1,7 +1,7 @@
-import { Map } from '../world';
 import { Item } from '../item';
 import { Mobile } from '../mobile';
-import { IShape, Circle, Rectangle2D, Point3D } from './Geometry';
+import { Map } from '../world';
+import { IShape, Circle, Rectangle2D, Point3D } from '../world/Geometry';
 
 export class Enumerator {
     public static GetMobiles(map:Map) {

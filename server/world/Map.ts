@@ -1,7 +1,7 @@
 import { Item } from '../item';
 import { Mobile } from '../mobile';
 import { Weather } from '../world';
-import { Point2D, Point3D } from './Geometry';
+import { Point2D, Point3D } from '../world/Geometry';
 
 export enum WeatherType {
   None = 0,

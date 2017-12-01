@@ -113,29 +113,30 @@ export class Mobile extends Entity {
   }
 
   public Move(direction:Direction):boolean {
-    if (this.Deleted) {
+    if (this.Deleted || !direction) {
       return false;
     }
 
-    if (direction) {
-      if (!this.CanMove) {
-        return false;
-      }
-
-      if (this.CheckMove(direction)) {
-          let newLocation: Point3D = this.Location;
-          let oldLocation: Point3D = newLocation;
-          let offset: Point2D = Movement.GetOffset(direction);
-
-          newLocation.X += offset.X;
-          newLocation.Y += offset.Y;
-          newLocation.Z += this.Map.GetZAt(newLocation);
-
-      }
+    if (!this.CanMove) {
+      return false;
     }
 
+    let oldLocation: Point3D = this.Location.Clone();
 
+    if (this.CheckMove(direction)) {
+      let newLocation: Point3D = this.Location.Clone();
+      let offset: Point2D = Movement.GetOffset(direction);
 
+      newLocation.X += offset.X;
+      newLocation.Y += offset.Y;
+      newLocation.Z += this.Map.GetZAt(newLocation);
+    }
+
+    this.OnAfterMove(oldLocation)
     return true;
   }
+
+    public OnAfterMove(oldLocation:Point3D): void {
+
+    }
 }

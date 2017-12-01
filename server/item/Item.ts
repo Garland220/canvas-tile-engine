@@ -1,4 +1,4 @@
-import { Static } from './Static';
+import { Static } from '../item';
 import { Mobile } from '../mobile';
 
 

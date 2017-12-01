@@ -29,6 +29,10 @@ export class Point2D {
     this.y = y;
   }
 
+  public Clone():Point2D {
+    return new Point2D(this.X, this.Y);
+  }
+
   public toString(): string {
     return '(${this.x}, ${this.y})';
   }
@@ -50,6 +54,10 @@ export class Point3D extends Point2D {
   constructor(x:number, y:number, z:number) {
     super(x, y);
     this.z = z;
+  }
+
+  public Clone():Point3D {
+    return new Point3D(this.X, this.Y, this.Z);
   }
 
   public toString(): string {

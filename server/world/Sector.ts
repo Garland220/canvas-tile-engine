@@ -1,8 +1,8 @@
-import { Mobile } from '../mobile';
-import { Map } from '../world';
 import { Item } from '../item';
+import { Mobile } from '../mobile';
 import { NetState } from '../network';
-import { Point2D } from './Geometry';
+import { Map } from '../world';
+import { Point2D } from '../world/Geometry';
 
 
 export class Sector {
