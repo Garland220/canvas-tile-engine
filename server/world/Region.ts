@@ -99,4 +99,16 @@ export class Region {
     return true;
   }
 
+  public Destroy():void {
+    this.map = undefined;
+    this.name = undefined;
+    this.area = undefined;
+    this.parent = undefined;
+    this.goLocation = undefined;
+
+    // for (let i: number = 0, len: number = this.sectors.length; i < len; i++) {
+      // this.sectors[i].Destroy();
+    // }
+  }
+
 }

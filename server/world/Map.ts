@@ -11,8 +11,30 @@ export class Map {
   public mobiles:Mobile[];
   public items:Item[];
 
+  public get Mobiles():Mobile[] {
+      return this.mobiles;
+  }
+
+  public get MobilesCount():number {
+      return this.mobiles.length;
+  }
+
   constructor() {
 
+  }
+
+  public AddMobile(mobile:Mobile):void {
+    if (this.mobiles.indexOf(mobile) === -1) {
+        this.mobiles.push(mobile);
+    }
+  }
+
+  public RemoveMobile(mobile:Mobile):void {
+      let index = this.mobiles.indexOf(mobile);
+
+      if (index !== -1) {
+          this.mobiles.splice(index, 1);
+      }
   }
 
   public save(): boolean {

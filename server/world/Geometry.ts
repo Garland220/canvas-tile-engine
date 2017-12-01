@@ -1,9 +1,8 @@
 
-interface IShape {
+export interface IShape {
   Center: Point2D | Point3D;
   Contains(point:Point3D): boolean;
 }
-
 
 export class Point2D {
   private x:number;
@@ -86,9 +85,9 @@ export class Rectangle2D implements IShape {
     );
   }
 
-  constructor(start:Point2D, end:Point2D) {
-    this.start = start;
-    this.end = end;
+  constructor(start:Point2D|Point3D, end:Point2D|Point3D) {
+    this.start = new Point2D(start.X, start.Y);
+      this.end = new Point2D(end.X, end.Y);;
   }
 
   public Contains(point:Point3D): boolean {
@@ -168,10 +167,10 @@ export class Triangle implements IShape {
     );
   }
 
-  constructor(point1:Point2D, point2:Point2D, point3:Point2D) {
-    this.point1 = point1;
-    this.point2 = point2;
-    this.point3 = point3;
+    constructor(point1: Point2D | Point3D, point2: Point2D | Point3D, point3: Point2D | Point3D) {
+    this.point1 = new Point2D(point1.X, point1.Y);
+    this.point2 = new Point2D(point2.X, point2.Y);
+    this.point3 = new Point2D(point3.X, point3.Y);
   }
 
   public Contains(point:Point3D): boolean {
@@ -217,8 +216,8 @@ export class Circle implements IShape {
     return this.radius;
   }
 
-  constructor(start:Point2D, radius:number) {
-    this.start = start;
+  constructor(start:Point2D|Point3D, radius:number) {
+    this.start = new Point2D(start.X, start.Y);
     this.radius = radius;
   }
 

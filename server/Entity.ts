@@ -22,9 +22,17 @@ export class Entity implements IEntity {
   private map:Map = null;
 
   public get ID():number {
+    // if (this.id > Number.MAX_SAFE_INTEGER) {
+    //     console.error('ID Exceeds safe int.');
+    // }
+
     return this.id;
   }
   public set ID(id:number) {
+    // if (this.id > Number.MAX_SAFE_INTEGER) {
+    //     console.error('ID Exceeds safe int.');
+    // }
+
     this.id = id;
   }
 
