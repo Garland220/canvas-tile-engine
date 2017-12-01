@@ -38,6 +38,12 @@ export class Tile {
   private shootThrough: boolean;
 }
 
+export class LandTile {
+  private id: number;
+  private name: string;
+  private z: number;
+}
+
 export class TileSet {
   private image: ImageData;
   private scale: number;
