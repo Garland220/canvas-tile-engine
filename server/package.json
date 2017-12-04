@@ -1,0 +1,20 @@
+{
+  "name": "zko-server",
+  "version": "0.0.1",
+  "description": "",
+  "dependencies": {
+    "@tweenjs/tween.js": "^17.1.1",
+    "@types/socket.io": "^1.4.31",
+    "bluebird": "^3.5.1",
+    "colors": "^1.1.2",
+    "express": "^4.13.4",
+    "ipaddr.js": "^1.5.4",
+    "pg": "^4.4.4",
+    "pluralize": "^1.2.1",
+    "socket.io": "^1.7.4",
+    "typeorm": "^0.1.2"
+  },
+  "devDependences": {
+    "typescript": "^2.6.1"
+  }
+}

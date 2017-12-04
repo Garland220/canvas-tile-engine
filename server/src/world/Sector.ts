@@ -3,7 +3,7 @@ import { Mobile } from '../mobile';
 import { NetState } from '../network';
 import { Map } from '../world';
 
-import { Point2D } from '../../shared/Geometry';
+import { Point2D } from '../../../shared/Geometry';
 
 
 export class Sector {

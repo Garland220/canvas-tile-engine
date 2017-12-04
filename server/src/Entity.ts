@@ -1,7 +1,7 @@
 import { Map, World } from './world';
 
-import { IEntity } from '../shared';
-import { Point3D } from '../shared/Geometry';
+import { IEntity } from '../../shared';
+import { Point3D } from '../../shared/Geometry';
 
 
 export class Entity implements IEntity {
