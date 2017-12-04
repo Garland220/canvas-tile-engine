@@ -29,4 +29,19 @@ export class HardwareInfo {
     this.os = os;
     this.userAgent = userAgent;
   }
+
+  public toJSON() {
+    let json = {};
+
+    for (let key in this) {
+      if (this.hasOwnProperty(key)) {
+        json[key] = this[key];
+      }
+    }
+    return json;
+  }
+
+  public toString(): string {
+    return JSON.stringify(this);
+  }
 }

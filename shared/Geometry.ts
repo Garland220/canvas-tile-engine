@@ -20,7 +20,7 @@ export class Point2D {
   }
 
   public get Y(): number {
-    return this.Y;
+    return this.y;
   }
   public set Y(y: number) {
     this.y = y;
@@ -55,12 +55,19 @@ export class Point2D {
     return (point.X === this.X && point.Y === this.Y);
   }
 
-  public toJSON() {
-    return { X: this.X, Y: this.Y };
+  public toJSON(): {[key: string]: any;} {
+    let json:any = {};
+
+    for (let key in this) {
+      if (this.hasOwnProperty(key)) {
+        json[<string>key] = this[key];
+      }
+    }
+    return json;
   }
 
   public toString(): string {
-    return '(${this.x}, ${this.y})';
+    return JSON.stringify(this);
   }
 }
 
@@ -115,12 +122,19 @@ export class Point3D extends Point2D {
     return (point.X === this.X && point.Y === this.Y);
   }
 
-  public toJSON() {
-    return { X: this.X, Y: this.Y, Z: this.Z };
+  public toJSON(): { [key: string]: any; } {
+    let json:any = {};
+
+    for (let key in this) {
+      if (this.hasOwnProperty(key)) {
+        json[<string>key] = this[key];
+      }
+    }
+    return json;
   }
 
   public toString(): string {
-    return '(${this.x}, ${this.y}, ${this.z})';
+    return JSON.stringify(this);
   }
 }
 
@@ -166,12 +180,19 @@ export class Rectangle2D implements IShape {
     );
   }
 
-  public toJSON() {
-    return { Start: this.Start, End: this.End };
+  public toJSON(): { [key: string]: any; } {
+    let json:any = {};
+
+    for (let key in this) {
+      if (this.hasOwnProperty(key)) {
+        json[<string>key] = this[key];
+      }
+    }
+    return json;
   }
 
   public toString(): string {
-    return '(${this.Start}, ${this.End})';
+    return JSON.stringify(this);
   }
 }
 
@@ -224,12 +245,19 @@ export class Rectangle3D implements IShape {
     );
   }
 
-  public toJSON() {
-    return { Start: this.Start, End: this.End };
+  public toJSON(): { [key: string]: any; } {
+    let json:any = {};
+
+    for (let key in this) {
+      if (this.hasOwnProperty(key)) {
+        json[<string>key] = this[key];
+      }
+    }
+    return json;
   }
 
   public toString(): string {
-    return '(${this.Start}, ${this.End})';
+    return JSON.stringify(this);
   }
 }
 
@@ -293,12 +321,19 @@ export class Triangle implements IShape {
     return ((u >= 0) && (v >= 0) && (u + v < 1));
   }
 
-  public toJSON() {
-    return { Point1: this.Point1, Point2: this.Point2, Point3: this.Point3 };
+  public toJSON(): { [key: string]: any; } {
+    let json:any = {};
+
+    for (let key in this) {
+      if (this.hasOwnProperty(key)) {
+        json[<string>key] = this[key];
+      }
+    }
+    return json;
   }
 
   public toString(): string {
-    return '(${this.Point1}, ${this.Point2}, ${this.Point3})';
+    return JSON.stringify(this);
   }
 }
 
@@ -336,12 +371,19 @@ export class Cone implements IShape {
     return false;
   }
 
-  public toJSON() {
-    return { Start: this.Start, End: this.End };
+  public toJSON(): { [key: string]: any; } {
+    let json:any = {};
+
+    for (let key in this) {
+      if (this.hasOwnProperty(key)) {
+        json[<string>key] = this[key];
+      }
+    }
+    return json;
   }
 
   public toString(): string {
-    return '(${this.Start}, ${this.End})';
+    return JSON.stringify(this);
   }
 }
 
@@ -371,11 +413,18 @@ export class Circle implements IShape {
   }
 
   public toJSON() {
-    return { Start: this.Center, Radius: this.Radius };
+    let json:any = {};
+
+    for (let key in this) {
+      if (this.hasOwnProperty(key)) {
+        json[<string>key] = this[key];
+      }
+    }
+    return json;
   }
 
   public toString(): string {
-    return '(${this.Center}, ${this.Radius})';
+    return JSON.stringify(this);
   }
 }
 
@@ -407,11 +456,18 @@ export class Sphere implements IShape {
     return Math.pow(dx, 2) + Math.pow(dy, 2) + Math.pow(dy, 2) <= Math.pow(this.radius, 2);
   }
 
-  public toJSON() {
-    return { Start: this.Center, Radius: this.Radius };
+  public toJSON(): { [key: string]: any; } {
+    let json:any = {};
+
+    for (let key in this) {
+      if (this.hasOwnProperty(key)) {
+        json[<string>key] = this[key];
+      }
+    }
+    return json;
   }
 
   public toString(): string {
-    return '(${this.Center}, ${this.Radius})';
+    return JSON.stringify(this);
   }
 }
