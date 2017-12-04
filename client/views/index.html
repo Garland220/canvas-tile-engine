@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Test</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      canvas {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="canvas"></canvas>
+
+    <script src="https://cdn.babylonjs.com/babylon.max.js"></script>
+    <script src="/js/bundle.js"></script>
+    <script>
+      window.client = new createClient(document.getElementById('canvas'));
+      window.addEventListener("resize", function() {
+        window.client.engine.resize();
+      });
+      window.addEventListener("keydown", function(e) {
+        window.client.KeyDown(e);
+      });
+      window.client.DefaultScene();
+    </script>
+  </body>
+</html>

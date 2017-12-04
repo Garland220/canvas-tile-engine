@@ -1,0 +1,16 @@
+{
+  "name": "zko-client",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "build": "./node_modules/webpack/bin/webpack.js --progress --config webpack.config.js"
+  },
+  "dependencies": {
+    "babylonjs": "^3.1.0-beta6"
+  },
+  "devDependencies": {
+    "ts-loader": "^3.2.0",
+    "typescript": "^2.6.2",
+    "webpack": "^3.9.1"
+  }
+}
