@@ -1,5 +1,6 @@
 import { Direction } from '../mobile';
 
+
 export interface IMobile {
   Alive: boolean;
   Flying: boolean;

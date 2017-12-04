@@ -45,6 +45,12 @@ export class Point2D {
     this.Y -= point.Y;
   }
 
+  public Distance(point: Point2D | Point3D): number {
+    let z = (<Point3D>point).Z || 0;
+
+    return Math.sqrt(Math.pow(this.X - point.X, 2) + Math.pow(this.Y - point.Y, 2) + Math.pow(0 - z, 2));
+  }
+
   public isEqual(point: Point2D | Point3D): boolean {
     return (point.X === this.X && point.Y === this.Y);
   }
@@ -94,6 +100,12 @@ export class Point3D extends Point2D {
     if ((<Point3D>point).Z) {
       this.Z -= (<Point3D>point).Z;
     }
+  }
+
+  public Distance(point: Point2D | Point3D): number {
+    let z = (<Point3D>point).Z || 0;
+
+    return Math.sqrt(Math.pow(this.X - point.X, 2) + Math.pow(this.Y - point.Y, 2) + Math.pow(this.Z - z, 2));
   }
 
   public isEqual(point: Point2D | Point3D): boolean {
@@ -291,6 +303,49 @@ export class Triangle implements IShape {
 }
 
 
+export class Cone implements IShape {
+  private start: Point3D;
+  private end: Point3D;
+  private length: number;
+
+  public get Start():Point3D {
+    return this.start;
+  }
+
+  public get End():Point3D {
+    return this.end;
+  }
+
+  public get Length():number {
+    return this.length;
+  }
+
+  public get Center():Point3D {
+    return Point3D.Zero;
+  }
+
+  constructor(start:Point3D, end:Point3D) {
+    this.start = start;
+    this.end = end;
+
+    this.length = start.Distance(end);
+  }
+
+  public Contains(point: Point3D): boolean {
+    // TODO Implement
+    return false;
+  }
+
+  public toJSON() {
+    return { Start: this.Start, End: this.End };
+  }
+
+  public toString(): string {
+    return '(${this.Start}, ${this.End})';
+  }
+}
+
+
 export class Circle implements IShape {
   private start: Point2D;
   private radius: number;
@@ -316,10 +371,47 @@ export class Circle implements IShape {
   }
 
   public toJSON() {
-    return { Start: this.start, Radius: this.Radius };
+    return { Start: this.Center, Radius: this.Radius };
   }
 
   public toString(): string {
-    return '(${this.Start}, ${this.Radius})';
+    return '(${this.Center}, ${this.Radius})';
+  }
+}
+
+
+export class Sphere implements IShape {
+  private start: Point3D;
+  private radius: number;
+
+  public get Center(): Point3D {
+    return this.start;
+  }
+
+  public get Radius(): number {
+    return this.radius;
+  }
+
+  constructor(start: Point2D | Point3D, radius: number) {
+    let z = (<Point3D>start).Z || 0;
+
+    this.start = new Point3D(start.X, start.Y, z);
+    this.radius = radius;
+  }
+
+  public Contains(point: Point3D): boolean {
+    let dx = (point.X - this.start.X);
+    let dy = (point.Y - this.start.Y);
+    let dz = (point.Z - this.start.Z);
+
+    return Math.pow(dx, 2) + Math.pow(dy, 2) + Math.pow(dy, 2) <= Math.pow(this.radius, 2);
+  }
+
+  public toJSON() {
+    return { Start: this.Center, Radius: this.Radius };
+  }
+
+  public toString(): string {
+    return '(${this.Center}, ${this.Radius})';
   }
 }
