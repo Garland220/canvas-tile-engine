@@ -51,6 +51,8 @@ export class Mobile extends Entity {
 
   constructor() {
     super();
+
+    World.AddMobile(this);
   }
 
   public IsPlayer():boolean {
@@ -60,7 +62,7 @@ export class Mobile extends Entity {
   public Kill(): void {
     if(!this.CanBeDamaged)
       return;
-    else if(!this.Alive /*|| IsDeadBondedPet*/)
+    else if(!this.Alive /*|| isDeadBondedPet*/)
       return;
     else if(this.Deleted)
       return;
@@ -136,7 +138,7 @@ export class Mobile extends Entity {
     return true;
   }
 
-    public OnAfterMove(oldLocation:Point3D): void {
+  public OnAfterMove(oldLocation:Point3D): void {
 
-    }
+  }
 }

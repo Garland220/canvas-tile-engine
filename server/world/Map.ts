@@ -39,25 +39,25 @@ export class Tile {
 }
 
 export class LandTile {
-  private id: number;
-  private name: string;
-  private z: number;
+  private id:number;
+  private name:string;
+  private z:number;
 }
 
 export class TileSet {
-  private image: ImageData;
-  private scale: number;
-  private rows: number;
-  private columns: number;
+  private image:ImageData;
+  private scale:number;
+  private rows:number;
+  private columns:number;
 
-  constructor(image: ImageData, height:number, width:number, scale: number = 32) {
+  constructor(image:ImageData, height:number, width:number, scale:number = 32) {
     this.image = image;
     this.scale = scale;
     this.rows = Math.floor(height / scale);
     this.columns = Math.floor(width / scale);
   }
 
-  public GetPointFromID(id:number): Point2D {
+  public GetPointFromID(id:number):Point2D {
     return new Point2D(Math.floor(id % this.columns), Math.floor(id / this.columns));
   }
 
@@ -75,12 +75,12 @@ export class MapTileData {
 export class Map {
   private id:number;
   private name:string;
-  private height: number;
-  private width: number;
-  private properties: MapPropertiess;
-  private tiledata: MapTileData;
+  private height:number;
+  private width:number;
+  private properties:MapPropertiess;
+  private tiledata:MapTileData;
 
-  private weather: Weather[];
+  private weather:Weather[];
   private mobiles:Mobile[];
   private items:Item[];
 
@@ -100,7 +100,7 @@ export class Map {
       return this.mobiles.length;
   }
 
-  public get Items(): Item[] {
+  public get Items():Item[] {
       return this.items;
   }
 
@@ -135,13 +135,13 @@ export class Map {
       }
   }
 
-  public AddItem(item: Item): void {
+  public AddItem(item:Item): void {
       if (this.items.indexOf(item) === -1) {
           this.items.push(item);
       }
   }
 
-  public RemoveItem(item: Item): void {
+  public RemoveItem(item:Item): void {
       let index = this.items.indexOf(item);
 
       if (index !== -1) {

@@ -63,7 +63,7 @@ export class NetState {
   }
 
   public OnDisconnect():void {
-    this.Destroy();
+    this.Delete();
   }
 
   public CheckActive():boolean {
@@ -82,7 +82,7 @@ export class NetState {
 
   }
 
-  public Destroy():void {
+  public Delete():void {
     NetState.RemoveClient(this.socket);
     this.socket = undefined;
     this.mobile = undefined;

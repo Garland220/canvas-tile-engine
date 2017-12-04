@@ -99,7 +99,7 @@ export class Region {
     return true;
   }
 
-  public Destroy():void {
+  public Delete():void {
     this.map = undefined;
     this.name = undefined;
     this.area = undefined;
@@ -107,7 +107,7 @@ export class Region {
     this.goLocation = undefined;
 
     // for (let i: number = 0, len: number = this.sectors.length; i < len; i++) {
-      // this.sectors[i].Destroy();
+      // this.sectors[i].Delete();
     // }
   }
 

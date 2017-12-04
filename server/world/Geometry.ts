@@ -2,6 +2,8 @@
 export interface IShape {
   Center: Point2D | Point3D;
   Contains(point:Point3D): boolean;
+  toJSON(): any;
+  toString(): string;
 }
 
 export class Point2D {
@@ -10,14 +12,14 @@ export class Point2D {
 
   public static readonly Zero:Point2D = new Point2D(0, 0);
 
-  public get X(): number {
+  public get X():number {
     return this.x;
   }
   public set X(x:number) {
     this.x = x;
   }
 
-  public get Y(): number {
+  public get Y():number {
     return this.Y;
   }
   public set Y(y:number) {
@@ -29,8 +31,16 @@ export class Point2D {
     this.y = y;
   }
 
-  public Clone():Point2D {
+  public Clone(): Point2D {
     return new Point2D(this.X, this.Y);
+  }
+
+  public isEqual(point:Point2D|Point3D):boolean {
+    return (point.X === this.X && point.Y === this.Y);
+  }
+
+  public toJSON() {
+      return { X: this.X, Y: this.Y };
   }
 
   public toString(): string {
@@ -44,7 +54,7 @@ export class Point3D extends Point2D {
 
   public static readonly Zero:Point3D = new Point3D(0, 0, 0);
 
-  public get Z(): number {
+  public get Z():number {
     return this.z;
   }
   public set Z(z:number) {
@@ -56,8 +66,19 @@ export class Point3D extends Point2D {
     this.z = z;
   }
 
-  public Clone():Point3D {
+  public Clone(): Point3D {
     return new Point3D(this.X, this.Y, this.Z);
+  }
+
+  public isEqual(point: Point2D | Point3D):boolean {
+    if ((<Point3D>point).Z && (<Point3D>point).Z !== this.Z) {
+      return false;
+    }
+    return (point.X === this.X && point.Y === this.Y);
+  }
+
+  public toJSON() {
+    return { X: this.X, Y: this.Y, Z: this.Z };
   }
 
   public toString(): string {
@@ -70,19 +91,19 @@ export class Rectangle2D implements IShape {
   private start:Point2D;
   private end:Point2D;
 
-  public get Start(): Point2D {
+  public get Start():Point2D {
     return this.start;
   }
 
-  public get End(): Point2D {
+  public get End():Point2D {
     return this.end;
   }
 
-  public get Width(): number {
+  public get Width():number {
     return this.end.X - this.start.X;
   }
 
-  public get Height(): number {
+  public get Height():number {
     return this.end.Y - this.end.Y;
   }
 
@@ -95,16 +116,24 @@ export class Rectangle2D implements IShape {
 
   constructor(start:Point2D|Point3D, end:Point2D|Point3D) {
     this.start = new Point2D(start.X, start.Y);
-      this.end = new Point2D(end.X, end.Y);;
+    this.end = new Point2D(end.X, end.Y);;
   }
 
-  public Contains(point:Point3D): boolean {
+  public Contains(point:Point3D):boolean {
     return (
       this.start.X <= point.X &&
       this.start.Y <= point.Y &&
       this.end.X > point.X &&
       this.end.Y > point.Y
     );
+  }
+
+  public toJSON() {
+      return { Start: this.Start, End: this.End };
+  }
+
+  public toString(): string {
+      return '(${this.Start}, ${this.End})';
   }
 }
 
@@ -113,19 +142,27 @@ export class Rectangle3D implements IShape {
   private start:Point3D;
   private end:Point3D;
 
-  public get Width(): number {
+  public get Start():Point3D {
+    return this.start;
+  }
+
+  public get End():Point3D {
+    return this.end;
+  }
+
+  public get Width():number {
     return this.end.X - this.start.X;
   }
 
-  public get Height(): number {
+  public get Height():number {
     return this.end.Y - this.end.Y;
   }
 
-  public get Depth(): number {
+  public get Depth():number {
     return this.end.Z - this.start.Z;
   }
 
-  public get Center(): Point2D {
+  public get Center():Point2D {
     return new Point3D(
       this.start.X + (this.Width / 2),
       this.start.Y + (this.Height / 2),
@@ -138,7 +175,7 @@ export class Rectangle3D implements IShape {
     this.end = end;
   }
 
-  public Contains(point:Point3D): boolean {
+  public Contains(point:Point3D):boolean {
     return (
       this.start.X <= point.X &&
       this.start.Y <= point.Y &&
@@ -148,6 +185,14 @@ export class Rectangle3D implements IShape {
       this.end.Z > point.Z
     );
   }
+
+  public toJSON() {
+    return { Start: this.Start, End: this.End };
+  }
+
+  public toString(): string {
+    return '(${this.Start}, ${this.End})';
+  }
 }
 
 
@@ -156,32 +201,32 @@ export class Triangle implements IShape {
   private point2:Point2D;
   private point3:Point2D;
 
-  public get Point1(): Point2D {
+  public get Point1():Point2D {
     return this.point1;
   }
 
-  public get Point2(): Point2D {
+  public get Point2():Point2D {
     return this.point2;
   }
 
-  public get Point3(): Point2D {
+  public get Point3():Point2D {
     return this.point3;
   }
 
-  public get Center(): Point2D {
+  public get Center():Point2D {
     return new Point2D(
       (this.point1.X + this.point2.X + this.point3.X) / 3,
       (this.point1.Y + this.point2.Y + this.point3.Y) / 3
     );
   }
 
-    constructor(point1: Point2D | Point3D, point2: Point2D | Point3D, point3: Point2D | Point3D) {
+  constructor(point1: Point2D | Point3D, point2: Point2D | Point3D, point3: Point2D | Point3D) {
     this.point1 = new Point2D(point1.X, point1.Y);
     this.point2 = new Point2D(point2.X, point2.Y);
     this.point3 = new Point2D(point3.X, point3.Y);
   }
 
-  public Contains(point:Point3D): boolean {
+  public Contains(point:Point3D):boolean {
     let delta1 = new Point2D(
       this.point3.X - this.point1.X,
       this.point3.Y - this.point3.Y
@@ -209,6 +254,14 @@ export class Triangle implements IShape {
 
     return ((u >= 0) && (v >= 0) && (u + v < 1));
   }
+
+  public toJSON() {
+    return { Point1: this.Point1, Point2: this.Point2, Point3: this.Point3 };
+  }
+
+  public toString(): string {
+    return '(${this.Point1}, ${this.Point2}, ${this.Point3})';
+  }
 }
 
 
@@ -216,11 +269,11 @@ export class Circle implements IShape {
   private start:Point2D;
   private radius:number;
 
-  public get Center(): Point2D {
+  public get Center():Point2D {
     return this.start;
   }
 
-  public get Radius(): number {
+  public get Radius():number {
     return this.radius;
   }
 
@@ -229,10 +282,18 @@ export class Circle implements IShape {
     this.radius = radius;
   }
 
-  public Contains(point:Point3D): boolean {
+  public Contains(point:Point3D):boolean {
     let dx = (point.X - this.start.X);
     let dy = (point.Y - this.start.Y);
 
     return Math.pow(dx, 2) + Math.pow(dy, 2) <= Math.pow(this.radius, 2);
+  }
+
+  public toJSON() {
+    return { Start: this.start, Radius: this.Radius };
+  }
+
+  public toString(): string {
+    return '(${this.Start}, ${this.Radius})';
   }
 }

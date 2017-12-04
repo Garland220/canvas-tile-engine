@@ -11,8 +11,7 @@ export class Client {
   private mobile:Mobile;
   private toString:string;
 
-  private connectedOn:Date;
-  private version:string;
+
 
 
   constructor() {
