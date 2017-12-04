@@ -1,7 +1,8 @@
 import { Map } from '../world';
-import { Mobile } from '../mobile';
 import { Item } from '../item';
-import { Point3D, Rectangle2D } from '../world/Geometry';
+import { Mobile } from '../mobile';
+
+import { Point3D, Rectangle2D } from '../../shared/Geometry';
 
 
 export class Region {

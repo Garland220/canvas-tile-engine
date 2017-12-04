@@ -1,7 +1,9 @@
 import { Item } from '../item';
 import { Mobile } from '../mobile';
 import { Weather } from '../world';
-import { Point2D, Point3D } from '../world/Geometry';
+
+import { Point2D, Point3D } from '../../shared/Geometry';
+
 
 export enum WeatherType {
   None = 0,
@@ -19,29 +21,6 @@ export class MapPropertiess {
   private allowDecay: boolean;
   private allowSpells: boolean;
   private weatherType: WeatherType;
-}
-
-export class Tile {
-  private id: number;
-  private name: string;
-  private height: number;
-  private frames: number;
-
-  // Flags
-  private wet: boolean;
-  private natural: boolean;
-  private surface: boolean;
-  private passable: boolean;
-  private damaging: boolean;
-  private animated: boolean;
-  private seeThrough: boolean;
-  private shootThrough: boolean;
-}
-
-export class LandTile {
-  private id:number;
-  private name:string;
-  private z:number;
 }
 
 export class TileSet {

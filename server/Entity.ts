@@ -1,17 +1,8 @@
 import { Map, World } from './world';
-import { Point3D } from './world/Geometry';
 
+import { IEntity } from '../shared';
+import { Point3D } from '../shared/Geometry';
 
-export interface IEntity {
-  ID:number;
-  Name:String;
-  Deleted:boolean;
-  Visible:boolean;
-  Location:Point3D;
-  Map:Map;
-  Delete():void;
-  ProcessDelta():void;
-}
 
 export class Entity implements IEntity {
   private id:number;

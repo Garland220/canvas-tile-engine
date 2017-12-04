@@ -1,9 +1,10 @@
 import { Map } from './world';
-import { IEntity } from './Entity';
 import { Item } from './item';
 import { Mobile } from './mobile';
 import { Direction } from './mobile/Movement';
-import { Point3D } from './world/Geometry';
+
+import { IEntity } from '../shared/Entity';
+import { Point3D } from '../shared/Geometry';
 
 
 export interface IMount {

@@ -1,5 +1,4 @@
 
-export * from './Geometry';
 export * from './Region';
 export * from './Map';
 export * from './World';

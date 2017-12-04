@@ -1,5 +1,7 @@
 import { Map } from '../world';
-import { Point2D, Rectangle2D } from '../world/Geometry';
+
+import { Point2D, Rectangle2D } from '../../shared/Geometry';
+
 
 export class Weather {
   private active:boolean = false;
