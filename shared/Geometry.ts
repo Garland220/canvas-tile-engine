@@ -35,6 +35,16 @@ export class Point2D {
     return new Point2D(this.X, this.Y);
   }
 
+  public Add(point:Point2D|Point3D): void {
+    this.X += point.X;
+    this.Y += point.Y;
+  }
+
+  public Subtract(point: Point2D | Point3D): void {
+    this.X -= point.X;
+    this.Y -= point.Y;
+  }
+
   public isEqual(point: Point2D | Point3D): boolean {
     return (point.X === this.X && point.Y === this.Y);
   }
@@ -68,6 +78,22 @@ export class Point3D extends Point2D {
 
   public Clone(): Point3D {
     return new Point3D(this.X, this.Y, this.Z);
+  }
+
+  public Add(point: Point2D | Point3D):void {
+    this.X += point.X;
+    this.Y += point.Y;
+    if ((<Point3D>point).Z) {
+      this.Z += (<Point3D>point).Z;
+    }
+  }
+
+  public Subtract(point: Point2D | Point3D): void {
+    this.X -= point.X;
+    this.Y -= point.Y;
+    if ((<Point3D>point).Z) {
+      this.Z -= (<Point3D>point).Z;
+    }
   }
 
   public isEqual(point: Point2D | Point3D): boolean {

@@ -41,7 +41,7 @@ export class Region {
     return this.goLocation;
   }
 
-  constructor(name: string, map: Map, area:Rectangle2D[], parent ?: Region) {
+  constructor(name: string, map: Map, area:Rectangle2D[], parent?: Region) {
 
   }
 

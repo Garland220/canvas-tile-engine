@@ -1,8 +1,9 @@
 import { Entity } from '../Entity';
-import { Movement, Direction } from '../mobile';
+import { Movement } from '../mobile';
 import { Map, Region, World } from '../world';
 
 import { Point2D, Point3D } from '../../shared/Geometry';
+import { Direction } from '../../shared/mobile';
 
 
 export class Mobile extends Entity {

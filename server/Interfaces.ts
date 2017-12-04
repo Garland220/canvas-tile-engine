@@ -1,16 +1,12 @@
 import { Map } from './world';
 import { Item } from './item';
 import { Mobile } from './mobile';
-import { Direction } from './mobile/Movement';
 
 import { IEntity } from '../shared/Entity';
 import { Point3D } from '../shared/Geometry';
+import { IMount } from '../shared/mobile';
+import { Direction } from '../shared/mobile/Movement';
 
-
-export interface IMount {
-  Rider:Mobile;
-  OnRiderDamaged(amount:number, from:Mobile, willKill:boolean): void;
-}
 
 export interface IMountItem {
   Mount:IMount;
@@ -50,11 +46,7 @@ export interface ISpell {
   // OnCastInTown(region: Region): boolean;
 }
 
-export interface IParty {
-  OnStamChanged(mobile:Mobile):void;
-  OnManaChanged(mobile:Mobile):void;
-  OnStatsQuery(beholder:Mobile, beheld:Mobile):void;
-}
+
 
 export interface ISpawner {
   UnlinkOnTaming:boolean;
