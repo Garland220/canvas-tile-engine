@@ -1,6 +1,7 @@
 import { Map, World } from './world';
 
 import { IEntity } from '../../shared';
+import { Direction } from '../../shared/mobile';
 import { Point3D } from '../../shared/Geometry';
 
 
@@ -10,6 +11,7 @@ export class Entity implements IEntity {
   private deleted:boolean = false;
   private visible:boolean = false;
   private location:Point3D = new Point3D(0, 0, 0);
+  private direction:Direction = Direction.North;
   private map:Map = null;
 
   public get ID():number {
@@ -52,6 +54,13 @@ export class Entity implements IEntity {
     this.location.X = point.X;
     this.location.Y = point.Y;
     this.location.Z = point.Z;
+  }
+
+  public get Direction():Direction {
+    return this.direction;
+  }
+  public set Direction(direction:Direction) {
+    this.direction = direction;
   }
 
   public get Map():Map {
