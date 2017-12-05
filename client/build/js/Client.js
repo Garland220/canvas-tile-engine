@@ -44,11 +44,11 @@ var Client = (function () {
         box.position.y = 3;
         var light = new babylonjs_1.PointLight('pointLight', new babylonjs_1.Vector3(0, 5, 0), this.scene);
         var spotlight = new babylonjs_1.SpotLight('spotLight', new babylonjs_1.Vector3(0, 10, -10), new babylonjs_1.Vector3(0, 0, 0), Math.PI / 3, 2, this.scene);
-        var particleSystem = new BABYLON.ParticleSystem("particles", 2000, this.scene);
-        particleSystem.particleTexture = new BABYLON.Texture("flare.png", this.scene);
+        var particleSystem = new babylonjs_1.ParticleSystem("particles", 2000, this.scene);
+        particleSystem.particleTexture = new babylonjs_1.Texture("flare.png", this.scene);
         particleSystem.minEmitBox = new babylonjs_1.Vector3(-1, 3.5, -1);
         particleSystem.maxEmitBox = new babylonjs_1.Vector3(1, 3, 1);
-        particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE;
+        particleSystem.blendMode = babylonjs_1.ParticleSystem.BLENDMODE_ONEONE;
         particleSystem.emitRate = 1000;
         particleSystem.emitter = box;
         particleSystem.start();
@@ -69,11 +69,6 @@ var Client = (function () {
     Client.prototype.Start = function () {
         this.active = true;
         this.engine.clear(babylonjs_1.Color3.Black().toColor4(), false, false);
-        this.engine.runRenderLoop(function () {
-            if (this.scene) {
-                this.scene.render();
-            }
-        });
     };
     Client.prototype.Stop = function () {
         this.active = false;
