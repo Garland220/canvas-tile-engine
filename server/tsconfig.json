@@ -6,6 +6,8 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "typeRoots": ["../@types"],
         "outDir": "./build/"
     },

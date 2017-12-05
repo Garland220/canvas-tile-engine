@@ -5,7 +5,7 @@ import { Direction } from '../../shared/mobile';
 import { Point3D } from '../../shared/Geometry';
 
 
-export class Entity implements IEntity {
+export abstract class Entity implements IEntity {
   private id:number;
   private name:string;
   private deleted:boolean = false;

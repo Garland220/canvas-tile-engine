@@ -6,7 +6,7 @@ import { Point2D, Point3D } from '../../../shared/Geometry';
 import { Direction } from '../../../shared/mobile';
 
 
-export class Mobile extends Entity {
+export abstract class Mobile extends Entity {
   private isPlayer:boolean = false;
   private alive:boolean = false;
 
@@ -133,6 +133,8 @@ export class Mobile extends Entity {
       newLocation.Y += offset.Y;
       newLocation.Z += this.Map.GetZAt(newLocation);
     }
+
+    this.Direction = direction;
 
     this.OnAfterMove(oldLocation);
     return true;
