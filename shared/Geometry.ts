@@ -46,9 +46,10 @@ export class Point2D {
   }
 
   public Distance(point: Point2D | Point3D): number {
-    let z = (<Point3D>point).Z || 0;
+    let dx: number = Math.abs(point.X - this.X);
+    let dy: number = Math.abs(point.Y - this.Y);
 
-    return Math.sqrt(Math.pow(this.X - point.X, 2) + Math.pow(this.Y - point.Y, 2) + Math.pow(0 - z, 2));
+    return Math.max(dx, dy);// Math.sqrt(Math.pow(this.X - point.X, 2) + Math.pow(this.Y - point.Y, 2));
   }
 
   public isEqual(point: Point2D | Point3D): boolean {
@@ -110,9 +111,13 @@ export class Point3D extends Point2D {
   }
 
   public Distance(point: Point2D | Point3D): number {
-    let z = (<Point3D>point).Z || 0;
+    let z: number = (<Point3D>point).Z || 0;
 
-    return Math.sqrt(Math.pow(this.X - point.X, 2) + Math.pow(this.Y - point.Y, 2) + Math.pow(this.Z - z, 2));
+    let dx: number = Math.abs(point.X - this.X);
+    let dy: number = Math.abs(point.Y - this.Y);
+    let dz: number = z === 0 ? 0 : Math.abs(z - this.Z);
+
+    return Math.max(dx, dy, dz);
   }
 
   public isEqual(point: Point2D | Point3D): boolean {
@@ -135,6 +140,69 @@ export class Point3D extends Point2D {
 
   public toString(): string {
     return JSON.stringify(this);
+  }
+}
+
+
+export class Line {
+  private start: Point3D;
+  private end: Point3D;
+
+  public get Start():Point3D {
+    return this.start;
+  }
+
+  public get End():Point3D {
+    return this.end;
+  }
+
+  constructor(start:Point3D, end:Point3D) {
+    this.start = start;
+    this.end = end;
+  }
+
+  public Distance():number {
+    let dx: number = Math.abs(this.end.X - this.start.X);
+    let dy: number = Math.abs(this.end.Y - this.start.Y);
+    let dz: number = Math.abs(this.end.Z - this.start.Z);
+
+    let distance = Math.max(dx, dy, dz);
+
+    return distance;
+  }
+
+  public Intersections(): Point3D[] {
+    let result:Point3D[] = [];
+    let dx:number = Math.abs(this.end.X - this.start.X);
+    let dy:number = Math.abs(this.end.Y - this.start.Y);
+    let dz:number = Math.abs(this.end.Z - this.start.Z);
+    let n:number = 1 + dx + dy;
+
+    let x_inc:number = (this.end.X > this.start.X) ? 1 : -1;
+    let y_inc:number = (this.end.Y > this.start.Y) ? 1 : -1;
+    let z_inc:number = (this.end.Z > this.start.Z) ? 1 : -1;
+
+    let error = dx - dy;
+    dx *= 2;
+    dy *= 2;
+
+    for (let i = 0; i < n; i++) {
+      let x = this.start.X + (x_inc * i);
+      let y = this.start.Y + (y_inc * i);
+      let z = this.start.Z + (z_inc * i);
+
+      result.push(new Point3D(x, y, z));
+
+      if (error > 0) {
+          x += x_inc;
+          error -= dy;
+      }
+      else {
+          y += y_inc;
+          error += dx;
+      }
+    }
+    return result;
   }
 }
 
@@ -168,7 +236,7 @@ export class Rectangle2D implements IShape {
 
   constructor(start: Point2D | Point3D, end: Point2D | Point3D) {
     this.start = new Point2D(start.X, start.Y);
-    this.end = new Point2D(end.X, end.Y);;
+    this.end = new Point2D(end.X, end.Y);
   }
 
   public Contains(point: Point3D): boolean {
@@ -230,8 +298,8 @@ export class Rectangle3D implements IShape {
   }
 
   constructor(start: Point3D, end: Point3D) {
-    this.start = start;
-    this.end = end;
+    this.start = start.Clone();
+    this.end = end.Clone();
   }
 
   public Contains(point: Point3D): boolean {
@@ -360,8 +428,8 @@ export class Cone implements IShape {
   }
 
   constructor(start:Point3D, end:Point3D) {
-    this.start = start;
-    this.end = end;
+    this.start = start.Clone();
+    this.end = end.Clone();
 
     this.length = start.Distance(end);
   }

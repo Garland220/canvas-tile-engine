@@ -7,25 +7,30 @@ import { Direction } from '../../../shared/mobile';
 
 
 export abstract class Mobile extends Entity {
-  private isPlayer:boolean = false;
-  private alive:boolean = false;
-
-  private flying:boolean = false;
-  private swimming:boolean = false;
-
-  private dazed:boolean = false;
-  private frozen:boolean = false;
-  private paralyzed:boolean = false;
-
   // private guild:Guild;
   private region:Region;
 
-  // Flags
-  private canMove:boolean = true;
-  private canFly:boolean = false;
-  private canSwim:boolean = false;
+  private isPlayer: boolean = false;
+  private alive: boolean = false;
 
-  private invulnerable:boolean = false;
+  private flying: boolean = false;
+  private swimming: boolean = false;
+
+  private dazed: boolean = false;
+  private frozen: boolean = false;
+  private paralyzed: boolean = false;
+
+  private canMove: boolean = true;
+  private canFly: boolean = false;
+  private canSwim: boolean = false;
+
+  private undead: boolean = false;
+  private demonic: boolean = false;
+  private cursed: boolean = false;
+
+  private blessed: boolean = false;
+
+  private invulnerable: boolean = false;
 
   public get Alive():boolean {
     return this.alive;
@@ -51,12 +56,28 @@ export abstract class Mobile extends Entity {
     return !this.invulnerable;
   }
 
-  constructor() {
-    super();
+  public get IsPlayer(): boolean {
+      return this.isPlayer;
   }
 
-  public IsPlayer():boolean {
-    return this.isPlayer;
+  public get IsUndead(): boolean {
+      return this.undead;
+  }
+
+  public set IsUndead(value: boolean) {
+      this.undead = value;
+  }
+
+  public get IsUnholy(): boolean {
+      return this.undead || this.demonic || this.cursed;
+  }
+
+  public get IsHoly(): boolean {
+      return this.blessed;
+  }
+
+  constructor() {
+    super();
   }
 
   public Kill():void {
@@ -108,6 +129,10 @@ export abstract class Mobile extends Entity {
 
   public OnAfterDelete():void {
 
+  }
+
+  public PathedDistance(point: Point3D): number {
+    return 0;
   }
 
   public CheckMove(direction:Direction):boolean {

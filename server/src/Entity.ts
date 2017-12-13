@@ -83,6 +83,26 @@ export abstract class Entity implements IEntity {
 
   }
 
+  public Clone(): any {
+    var cloneObj = new (<any>this.constructor());
+    for (var attribut in this) {
+      if (typeof this[attribut] === "object") {
+        cloneObj[attribut] = this.Clone();
+      } else {
+        cloneObj[attribut] = this[attribut];
+      }
+    }
+    return cloneObj;
+  }
+
+  public DistanceTo(point: Point3D): number {
+    return this.Location.Distance(point);
+  }
+
+  public InRange(point: Point3D, range: number): boolean {
+    return range <= this.DistanceTo(point);
+  }
+
   public Delete():void {
     this.deleted = true;
   }
