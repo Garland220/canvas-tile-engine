@@ -6,6 +6,9 @@ export interface IShape {
   toString(): string;
 }
 
+/**
+ * Two dimensional grid location
+ */
 export class Point2D {
   private x: number;
   private y: number;
@@ -73,6 +76,9 @@ export class Point2D {
 }
 
 
+/**
+ * Three dimensional grid location
+ */
 export class Point3D extends Point2D {
   public z: number;
 
@@ -144,6 +150,9 @@ export class Point3D extends Point2D {
 }
 
 
+/**
+ * Line or Ray, can determine direct distance and intersections
+ */
 export class Line {
   private start: Point3D;
   private end: Point3D;
@@ -207,6 +216,9 @@ export class Line {
 }
 
 
+/**
+ * Two dimensional rectangle. Ignores Point's Z coordinates.
+ */
 export class Rectangle2D implements IShape {
   private start: Point2D;
   private end: Point2D;
@@ -265,6 +277,9 @@ export class Rectangle2D implements IShape {
 }
 
 
+/**
+ * Three dimensional rectangle. Will respect Point's Z coordinates.
+ */
 export class Rectangle3D implements IShape {
   private start: Point3D;
   private end: Point3D;
@@ -330,6 +345,9 @@ export class Rectangle3D implements IShape {
 }
 
 
+/**
+ * Two dimensional triangle. Will ignore Point's Z coordinates
+ */
 export class Triangle implements IShape {
   private point1: Point2D;
   private point2: Point2D;
@@ -406,6 +424,9 @@ export class Triangle implements IShape {
 }
 
 
+/**
+ * Three dimensional cone. Will respect Point's Z coordinates.
+ */
 export class Cone implements IShape {
   private start: Point3D;
   private end: Point3D;
@@ -456,6 +477,9 @@ export class Cone implements IShape {
 }
 
 
+/**
+ * Two dimensional circle. Will ignore Point's Z coordinates.
+ */
 export class Circle implements IShape {
   private start: Point2D;
   private radius: number;
@@ -497,6 +521,9 @@ export class Circle implements IShape {
 }
 
 
+/**
+ * Three dimensional Sphere. Will respect Point's Z coordinates.
+ */
 export class Sphere implements IShape {
   private start: Point3D;
   private radius: number;
