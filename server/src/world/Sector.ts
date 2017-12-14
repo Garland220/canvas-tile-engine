@@ -33,11 +33,11 @@ export class Sector {
         return this.clients;
     }
 
-    constructor(x:number, y:number) {
+    constructor(x: number, y: number) {
 
     }
 
-    public Add(list:any[], value:any):void {
+    public Add(list: any[], value: any): void {
         if (!list) {
             list = [];
         }
@@ -45,7 +45,7 @@ export class Sector {
         list.push(value);
     }
 
-    public Remove(list:any[], value:any):void {
+    public Remove(list: any[], value: any): void {
         if (list) {
             let index = list.indexOf(value);
 
@@ -55,7 +55,7 @@ export class Sector {
         }
     }
 
-    public AddMobile(mobile:Mobile): void {
+    public AddMobile(mobile: Mobile): void {
         this.Add(this.mobiles, mobile);
 
         if (mobile.IsPlayer) {
@@ -63,7 +63,7 @@ export class Sector {
         }
     }
 
-    public RemoveMobile(mobile:Mobile): void {
+    public RemoveMobile(mobile: Mobile): void {
         this.Remove(this.mobiles, mobile);
 
         if (mobile.IsPlayer) {
@@ -71,7 +71,7 @@ export class Sector {
         }
     }
 
-    public AddItem(item:Item):void {
+    public AddItem(item: Item): void {
         this.Add(this.items, item);
     }
 

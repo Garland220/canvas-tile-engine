@@ -2,20 +2,20 @@ import { Mobile } from '../mobile';
 
 
 export class Client {
-  private active:boolean = false;
-  private address:string = '';
-  private account:Account;
-  // private socket: Socket;
-  private sendQueue:string[];
+    private active: boolean = false;
+    private address: string = '';
+    private account: Account;
+    // private socket: Socket;
+    private sendQueue: string[];
 
-  private mobile:Mobile;
-  private toString:string;
+    private mobile: Mobile;
+    private toString: string;
 
-  private connectedOn:Date;
-  private version:string;
+    private connectedOn: Date;
+    private version: string;
 
 
-  constructor() {
+    constructor() {
 
-  }
+    }
 }

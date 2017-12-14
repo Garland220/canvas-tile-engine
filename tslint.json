@@ -14,20 +14,20 @@
           "call-signature": "nospace",
           "index-signature": "nospace",
           "parameter": "nospace",
-          "property-declaration": "nospace",
-          "variable-declaration": "nospace"
+          "property-declaration": "onespace",
+          "variable-declaration": "onespace"
         },
         {
           "call-signature": "nospace",
           "index-signature": "nospace",
           "parameter": "nospace",
-          "property-declaration": "nospace",
-          "variable-declaration": "nospace"
+          "property-declaration": "onespace",
+          "variable-declaration": "onespace"
         }
     ],
     "indent": [true,
       "spaces",
-      2
+      4
     ],
     "no-console": {
       "options": [

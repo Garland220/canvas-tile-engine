@@ -1,3 +1,3 @@
 
-export * from './Mobile';
+export * from './BaseMobile';
 export * from './Movement';

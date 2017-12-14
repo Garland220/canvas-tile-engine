@@ -1,42 +1,42 @@
 
 
 export class Core {
-  private static debug:boolean = false;
+    private static debug: boolean = false;
 
-  private static crashed:boolean = false;
-  private static closing:boolean = false;
+    private static crashed: boolean = false;
+    private static closing: boolean = false;
 
-  private static globalUpdateRange:number = 18;
-  private static globalMaxUpdateRange:number = 24;
+    private static globalUpdateRange: number = 18;
+    private static globalMaxUpdateRange: number = 24;
 
 
-  public static Start():void {
+    public static Start(): void {
 
-  }
-
-  public static Stop(restart:boolean = false):void {
-    if (this.closing) {
-      return;
     }
 
-    this.closing = true;
+    public static Stop(restart: boolean = false): void {
+        if (this.closing) {
+            return;
+        }
 
-    // World.WaitForWriteCompletion();
+        this.closing = true;
 
-    // if (!crashed) {
-    //     EventSink.InvokeShutdown(new ShutdownEventArgs());
-    // }
+        // World.WaitForWriteCompletion();
 
-    // Timer.TimerThread.Set();
+        // if (!crashed) {
+        //     EventSink.InvokeShutdown(new ShutdownEventArgs());
+        // }
 
-    console.log("Exiting...");
+        // Timer.TimerThread.Set();
 
-    if (restart) {
-      // Process.Start(ExePath, Arguments);
+        console.log("Exiting...");
+
+        if (restart) {
+            // Process.Start(ExePath, Arguments);
+        }
+
+        console.log("done");
+
+        // m_Process.Kill();
     }
-
-    console.log("done");
-
-    // m_Process.Kill();
-  }
 }

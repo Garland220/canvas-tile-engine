@@ -1,3 +1,3 @@
 
-export * from 'Map';
-export * from 'Tile';
+export * from './BaseMap';
+export * from './Tile';
