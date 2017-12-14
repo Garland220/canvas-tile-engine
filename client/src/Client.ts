@@ -2,10 +2,15 @@ import { Engine, Scene, Mesh, Texture, ParticleSystem, PointLight, SpotLight, Fr
 import { ActionManager } from 'babylonjs';
 
 import { Key } from './KeyCodes';
+import { Player } from './Player';
+import { HardwareInfo } from '../../shared/user';
 
 
 export class Client {
     private active: boolean;
+
+    private hardwareInfo: HardwareInfo;
+
     private engine: Engine;
     private scene: Scene;
     private camera: FreeCamera;
@@ -13,17 +18,27 @@ export class Client {
     private settings: { [key: string]: any } = {};
     private zoom: number = 5;
 
-    private player: BABYLON.Mesh;
+    private player: Player;
 
     constructor(canvas: HTMLCanvasElement, antialias: boolean = true, adaptToDeviceRatio: boolean = true) {
-        this.engine = new Engine(canvas, antialias, {}, adaptToDeviceRatio);
+        this.CreateHardwareInfo();
         this.canvas = canvas;
 
+        this.engine = new Engine(canvas, antialias, {}, adaptToDeviceRatio);
         this.settings.antialias = antialias;
         this.settings.adaptToDeviceRatio = adaptToDeviceRatio;
 
         this.Start();
         this.DebugScene();
+    }
+
+    public CreateHardwareInfo(): void {
+        let cpuCores: number = navigator.hardwareConcurrency;
+        let memory: number = window.performance.memory.jsHeapSizeLimit;
+        let os: string = window.navigator.platform || window.navigator.oscpu;
+        let userAgent: string = window.navigator.userAgent;
+
+        this.hardwareInfo = new HardwareInfo(cpuCores, memory, os, userAgent);
     }
 
     public ChangeDisplaySetting(antialias: boolean = true, adaptToDeviceRatio: boolean = true): void {
@@ -108,7 +123,6 @@ export class Client {
 
     public SetupTriggers(scene: Scene): void {
         scene.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnRightPickTrigger, function(evt) {
-            this.player
         }));
     }
 
