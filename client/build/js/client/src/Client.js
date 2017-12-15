@@ -2,19 +2,63 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var babylonjs_1 = require("babylonjs");
 var KeyCodes_1 = require("./KeyCodes");
+var user_1 = require("../../shared/user");
 var Client = (function () {
     function Client(canvas, antialias, adaptToDeviceRatio) {
         if (antialias === void 0) { antialias = true; }
         if (adaptToDeviceRatio === void 0) { adaptToDeviceRatio = true; }
+        this.hasMemoryAPI = true;
         this.settings = {};
         this.zoom = 5;
-        this.engine = new babylonjs_1.Engine(canvas, antialias, {}, adaptToDeviceRatio);
         this.canvas = canvas;
+        this.CreateHardwareInfo();
+        this.engine = new babylonjs_1.Engine(canvas, antialias, {}, adaptToDeviceRatio);
         this.settings.antialias = antialias;
         this.settings.adaptToDeviceRatio = adaptToDeviceRatio;
         this.Start();
         this.DebugScene();
     }
+    Object.defineProperty(Client.prototype, "HardwareInfo", {
+        get: function () {
+            return this.hardwareInfo;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Client.prototype, "Player", {
+        get: function () {
+            return this.player;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Client.prototype.CreateHardwareInfo = function () {
+        var cpuCores = navigator['hardwareConcurrency'];
+        var memory = window.performance['memory'] ? window.performance['memory']['jsHeapSizeLimit'] : undefined;
+        var os = window.navigator['platform'] || window.navigator['oscpu'];
+        var userAgent = window.navigator['userAgent'];
+        var language = window.navigator['language'];
+        var videoCard;
+        try {
+            var gl = this.canvas.getContext('webgl') || this.canvas.getContext('experimental-webgl');
+            if (gl) {
+                var debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+                videoCard = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+            }
+        }
+        catch (e) { }
+        this.hardwareInfo = new user_1.HardwareInfo(cpuCores, memory, videoCard, os, userAgent, language);
+        this.GetUsedMemory();
+    };
+    Client.prototype.GetUsedMemory = function () {
+        if (!this.hasMemoryAPI) {
+            return;
+        }
+        if (!window.performance['memory']) {
+            this.hasMemoryAPI = false;
+        }
+        this.hardwareInfo.MemoryUsed = window.performance['memory'] ? window.performance['memory']['usedJSHeapSize'] : null;
+    };
     Client.prototype.ChangeDisplaySetting = function (antialias, adaptToDeviceRatio) {
         if (antialias === void 0) { antialias = true; }
         if (adaptToDeviceRatio === void 0) { adaptToDeviceRatio = true; }
@@ -47,11 +91,11 @@ var Client = (function () {
         this.scene.clearColor = babylonjs_1.Color3.White().toColor4();
         this.camera = new babylonjs_1.FreeCamera('Client Camera', new babylonjs_1.Vector3(5, 5, -5), this.scene);
         this.camera.mode = BABYLON.Camera.ORTHOGRAPHIC_CAMERA;
-        this.ZoomCamera();
         this.FocusCameara(babylonjs_1.Vector3.Zero());
+        this.ZoomCamera();
         var floor = babylonjs_1.Mesh.CreateGround('Floor', 100, 100, 1, this.scene, false);
-        var box = babylonjs_1.Mesh.CreateBox('Box', 6.0, this.scene);
-        box.position.y = 3;
+        var box = babylonjs_1.Mesh.CreateBox('Box', 2.0, this.scene);
+        box.position.y = 1;
         var light = new babylonjs_1.PointLight('pointLight', new babylonjs_1.Vector3(0, 5, 0), this.scene);
         var spotlight = new babylonjs_1.SpotLight('spotLight', new babylonjs_1.Vector3(0, 10, -10), new babylonjs_1.Vector3(0, 0, 0), Math.PI / 3, 2, this.scene);
         var particleSystem = new babylonjs_1.ParticleSystem("particles", 2000, this.scene);
@@ -70,6 +114,10 @@ var Client = (function () {
             light.specular = new babylonjs_1.Color3(0.8 + Math.random() * 0.1, 0.8 + Math.random() * 0.1, 0);
         });
         this.ChangeScene(this.scene);
+    };
+    Client.prototype.SetupTriggers = function (scene) {
+        scene.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnRightPickTrigger, function (evt) {
+        }));
     };
     Client.prototype.ChangeScene = function (scene) {
         this.engine.runRenderLoop(function () {

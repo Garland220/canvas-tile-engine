@@ -1,92 +1,99 @@
 import * as SocketIO from 'socket.io';
 
-import { Account, Client } from '../user';
+import { Account } from '../user';
 import { Mobile } from '../mobile';
+
+import { Version } from '../../../shared/Version';
+import { HardwareInfo } from '../../../shared/user';
 
 
 class SocketMap {
-  [socket: string]: NetState
+    [socket: string]: NetState
 }
 
 export class NetState {
-  private active: boolean;
+    private active: boolean;
 
-  private socket:SocketIO.Socket;
-  private address:IPAddress;
+    private sendQueue: string[];
 
-  private account:Account;
-  private mobile:Mobile;
+    private socket: SocketIO.Socket;
+    private address: IPAddress;
 
-  private connectedOn: Date;
-  private version: string;
+    private account: Account;
+    private mobile: Mobile;
 
-  private static _clients:SocketMap = {};
-  public static get Clients():SocketMap {
-    return NetState._clients
-  }
+    private connectedOn: Date;
 
-  public get Socket():SocketIO.Socket {
-    return this.socket;
-  }
+    private hardwareInfo: HardwareInfo;
+    private version: Version;
 
-  constructor(socket:SocketIO.Socket) {
-    this.socket = socket;
-    this.address = socket.request.connection.remoteAddress;
-    this.connectedOn = new Date();
-    this.active = true;
-
-    NetState.AddClient(socket, this);
-  }
-
-  public static AddClient(socket: SocketIO.Socket, instance: NetState): void {
-    if (NetState.Clients[socket.id]) {
-      return;
+    private static _clients: SocketMap = {};
+    public static get Clients(): SocketMap {
+        return NetState._clients
     }
 
-    if (socket && instance) {
-      NetState.Clients[socket.id] = instance;
+    public get Socket(): SocketIO.Socket {
+        return this.socket;
     }
-  }
 
-  public static RemoveClient(socket: SocketIO.Socket): void {
-    if (NetState.Clients[socket.id]) {
-      delete NetState.Clients[socket.id];
+    constructor(socket: SocketIO.Socket) {
+        this.socket = socket;
+        this.address = socket.request.connection.remoteAddress;
+        this.connectedOn = new Date();
+        this.active = true;
+
+        NetState.AddClient(socket, this);
     }
-  }
 
-  public static GetClient(socket:SocketIO.Socket):NetState {
-    return NetState.Clients[socket.id];
-  }
+    public static AddClient(socket: SocketIO.Socket, instance: NetState): void {
+        if (NetState.Clients[socket.id]) {
+            return;
+        }
 
-  public OnConnect():void {
+        if (socket && instance) {
+            NetState.Clients[socket.id] = instance;
+        }
+    }
 
-  }
+    public static RemoveClient(socket: SocketIO.Socket): void {
+        if (NetState.Clients[socket.id]) {
+            delete NetState.Clients[socket.id];
+        }
+    }
 
-  public OnDisconnect():void {
-    this.Delete();
-  }
+    public static GetClient(socket: SocketIO.Socket): NetState {
+        return NetState.Clients[socket.id];
+    }
 
-  public CheckActive():boolean {
-    return true;
-  }
+    public OnConnect(): void {
 
-  public Send():void {
+    }
 
-  }
+    public OnDisconnect(): void {
+        this.Delete();
+    }
 
-  public OnSend():void {
+    public CheckActive(): boolean {
+        return true;
+    }
 
-  }
+    public Send(): void {
 
-  public AfterSend():void {
+    }
 
-  }
+    public OnSend(): void {
 
-  public Delete():void {
-    NetState.RemoveClient(this.socket);
-    this.socket = undefined;
-    this.mobile = undefined;
-    this.account = undefined;
-    this.address = undefined;
-  }
+    }
+
+    public AfterSend(): void {
+
+    }
+
+    public Delete(): void {
+        NetState.RemoveClient(this.socket);
+        this.socket = undefined;
+        this.mobile = undefined;
+        this.account = undefined;
+        this.address = undefined;
+    }
 }

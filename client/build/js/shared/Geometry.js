@@ -47,8 +47,9 @@ var Point2D = (function () {
         this.Y -= point.Y;
     };
     Point2D.prototype.Distance = function (point) {
-        var z = point.Z || 0;
-        return Math.sqrt(Math.pow(this.X - point.X, 2) + Math.pow(this.Y - point.Y, 2) + Math.pow(0 - z, 2));
+        var dx = Math.abs(point.X - this.X);
+        var dy = Math.abs(point.Y - this.Y);
+        return Math.max(dx, dy);
     };
     Point2D.prototype.isEqual = function (point) {
         return (point.X === this.X && point.Y === this.Y);
@@ -105,7 +106,10 @@ var Point3D = (function (_super) {
     };
     Point3D.prototype.Distance = function (point) {
         var z = point.Z || 0;
-        return Math.sqrt(Math.pow(this.X - point.X, 2) + Math.pow(this.Y - point.Y, 2) + Math.pow(this.Z - z, 2));
+        var dx = Math.abs(point.X - this.X);
+        var dy = Math.abs(point.Y - this.Y);
+        var dz = z === 0 ? 0 : Math.abs(z - this.Z);
+        return Math.max(dx, dy, dz);
     };
     Point3D.prototype.isEqual = function (point) {
         if (point.Z && point.Z !== this.Z) {
@@ -129,11 +133,67 @@ var Point3D = (function (_super) {
     return Point3D;
 }(Point2D));
 exports.Point3D = Point3D;
+var Line = (function () {
+    function Line(start, end) {
+        this.start = start;
+        this.end = end;
+    }
+    Object.defineProperty(Line.prototype, "Start", {
+        get: function () {
+            return this.start;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Line.prototype, "End", {
+        get: function () {
+            return this.end;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Line.prototype.Distance = function () {
+        var dx = Math.abs(this.end.X - this.start.X);
+        var dy = Math.abs(this.end.Y - this.start.Y);
+        var dz = Math.abs(this.end.Z - this.start.Z);
+        var distance = Math.max(dx, dy, dz);
+        return distance;
+    };
+    Line.prototype.Intersections = function () {
+        var result = [];
+        var dx = Math.abs(this.end.X - this.start.X);
+        var dy = Math.abs(this.end.Y - this.start.Y);
+        var dz = Math.abs(this.end.Z - this.start.Z);
+        var n = 1 + dx + dy;
+        var x_inc = (this.end.X > this.start.X) ? 1 : -1;
+        var y_inc = (this.end.Y > this.start.Y) ? 1 : -1;
+        var z_inc = (this.end.Z > this.start.Z) ? 1 : -1;
+        var error = dx - dy;
+        dx *= 2;
+        dy *= 2;
+        for (var i = 0; i < n; i++) {
+            var x = this.start.X + (x_inc * i);
+            var y = this.start.Y + (y_inc * i);
+            var z = this.start.Z + (z_inc * i);
+            result.push(new Point3D(x, y, z));
+            if (error > 0) {
+                x += x_inc;
+                error -= dy;
+            }
+            else {
+                y += y_inc;
+                error += dx;
+            }
+        }
+        return result;
+    };
+    return Line;
+}());
+exports.Line = Line;
 var Rectangle2D = (function () {
     function Rectangle2D(start, end) {
         this.start = new Point2D(start.X, start.Y);
         this.end = new Point2D(end.X, end.Y);
-        ;
     }
     Object.defineProperty(Rectangle2D.prototype, "Start", {
         get: function () {
@@ -193,8 +253,8 @@ var Rectangle2D = (function () {
 exports.Rectangle2D = Rectangle2D;
 var Rectangle3D = (function () {
     function Rectangle3D(start, end) {
-        this.start = start;
-        this.end = end;
+        this.start = start.Clone();
+        this.end = end.Clone();
     }
     Object.defineProperty(Rectangle3D.prototype, "Start", {
         get: function () {
@@ -328,8 +388,8 @@ var Triangle = (function () {
 exports.Triangle = Triangle;
 var Cone = (function () {
     function Cone(start, end) {
-        this.start = start;
-        this.end = end;
+        this.start = start.Clone();
+        this.end = end.Clone();
         this.length = start.Distance(end);
     }
     Object.defineProperty(Cone.prototype, "Start", {

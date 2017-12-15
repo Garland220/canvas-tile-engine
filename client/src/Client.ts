@@ -4,10 +4,12 @@ import { ActionManager } from 'babylonjs';
 import { Key } from './KeyCodes';
 import { Player } from './Player';
 import { HardwareInfo } from '../../shared/user';
+import { Version } from '../../shared/Version';
 
 
 export class Client {
     private active: boolean;
+    private hasMemoryAPI: boolean = true;
 
     private hardwareInfo: HardwareInfo;
 
@@ -20,9 +22,17 @@ export class Client {
 
     private player: Player;
 
+    public get HardwareInfo(): HardwareInfo {
+        return this.hardwareInfo;
+    }
+
+    public get Player(): Player {
+        return this.player;
+    }
+
     constructor(canvas: HTMLCanvasElement, antialias: boolean = true, adaptToDeviceRatio: boolean = true) {
-        this.CreateHardwareInfo();
         this.canvas = canvas;
+        this.CreateHardwareInfo();
 
         this.engine = new Engine(canvas, antialias, {}, adaptToDeviceRatio);
         this.settings.antialias = antialias;
@@ -33,12 +43,35 @@ export class Client {
     }
 
     public CreateHardwareInfo(): void {
-        let cpuCores: number = navigator.hardwareConcurrency;
-        let memory: number = window.performance.memory.jsHeapSizeLimit;
-        let os: string = window.navigator.platform || window.navigator.oscpu;
-        let userAgent: string = window.navigator.userAgent;
+        const cpuCores: number = navigator['hardwareConcurrency'];
+        const memory: number = (<any>window.performance)['memory'] ? <number>(<any>window.performance)['memory']['jsHeapSizeLimit'] : undefined;
+        const os: string = window.navigator['platform'] || (<any>window.navigator)['oscpu'];
+        const userAgent: string = window.navigator['userAgent'];
+        const language: string = window.navigator['language'];
+        let videoCard;
 
-        this.hardwareInfo = new HardwareInfo(cpuCores, memory, os, userAgent);
+        try {
+            let gl = this.canvas.getContext('webgl') || this.canvas.getContext('experimental-webgl');
+            if (gl) {
+                let debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+                videoCard = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+            }
+        } catch (e) {}
+
+        this.hardwareInfo = new HardwareInfo(cpuCores, memory, videoCard, os, userAgent, language);
+        this.GetUsedMemory();
+    }
+
+    public GetUsedMemory(): void {
+        if (!this.hasMemoryAPI) {
+            return;
+        }
+
+        if (!(<any>window.performance)['memory']) {
+            this.hasMemoryAPI = false;
+        }
+
+        this.hardwareInfo.MemoryUsed = (<any>window.performance)['memory'] ? <number>(<any>window.performance)['memory']['usedJSHeapSize'] : null
     }
 
     public ChangeDisplaySetting(antialias: boolean = true, adaptToDeviceRatio: boolean = true): void {

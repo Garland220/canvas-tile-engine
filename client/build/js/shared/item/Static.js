@@ -10,15 +10,13 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var mobile_1 = require("../../../shared/mobile");
-var Mobile = (function (_super) {
-    __extends(Mobile, _super);
-    function Mobile() {
+var item_1 = require("../item");
+var Static = (function (_super) {
+    __extends(Static, _super);
+    function Static() {
         return _super.call(this) || this;
     }
-    Mobile.prototype.Render = function () {
-    };
-    return Mobile;
-}(mobile_1.BaseMobile));
-exports.Mobile = Mobile;
-//# sourceMappingURL=Mobile.js.map
+    return Static;
+}(item_1.BaseItem));
+exports.Static = Static;
+//# sourceMappingURL=Static.js.map
