@@ -8,17 +8,19 @@ export function Constructable<T extends { new(...args: any[]): {} }>(target: T):
 }
 
 
+export function Enumerable(value: boolean) {
+    return function(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+        descriptor.enumerable = value;
+    };
+}
+
+
 // This doesn't work. Need to rethink.
 export function AccessRequirement(accessLevel: AccessLevel) {
     return function(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         target.WriteLevel = accessLevel;
         target.ReadLevel = accessLevel;
+
+        return descriptor;
     }
-}
-
-
-export function Enumerable(value: boolean) {
-    return function(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-        descriptor.enumerable = value;
-    };
 }

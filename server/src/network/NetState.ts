@@ -69,7 +69,7 @@ export class NetState {
 
     }
 
-    private OnLogin(event: LoginEvent): void {
+    private OnLogin(event: Event): void {
     }
 
     public OnDisconnect(): void {

@@ -15,7 +15,6 @@ var HardwareInfo = (function () {
         this.os = '';
         this.userAgent = '';
         this.language = 'en-US';
-        this.version = '';
         this.cpuCores = cores;
         this.memory = memory;
         this.videoCard = videoCard;
