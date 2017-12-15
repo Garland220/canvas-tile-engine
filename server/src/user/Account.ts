@@ -16,7 +16,10 @@ export enum AccessLevel {
 export class Account implements IAccount {
     private username: string;
     private email: string;
+
     private created: Date;
+    private lastOnline: Date;
+    private totalPlaytime: number; // seconds
 
     private accessLevel: AccessLevel;
     private mobiles: Mobile[];
@@ -31,6 +34,10 @@ export class Account implements IAccount {
 
     public get Created(): Date {
         return this.created;
+    }
+
+    public get LastOnline(): Date {
+        return this.lastOnline;
     }
 
     public get Age(): string {

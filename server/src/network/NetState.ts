@@ -69,6 +69,9 @@ export class NetState {
 
     }
 
+    private OnLogin(event: LoginEvent): void {
+    }
+
     public OnDisconnect(): void {
         this.Delete();
     }
