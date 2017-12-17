@@ -17,7 +17,7 @@ export interface IMobile {
 
     Invulnerable: boolean;
 
-    CheckMove(direction: Direction): boolean
+    CheckMove(direction: Direction): boolean;
 }
 
 export interface IMount {

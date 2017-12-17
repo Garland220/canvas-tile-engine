@@ -29,7 +29,7 @@ export class NetState {
 
     private static _clients: SocketMap = {};
     public static get Clients(): SocketMap {
-        return NetState._clients
+        return NetState._clients;
     }
 
     public get Socket(): SocketIO.Socket {

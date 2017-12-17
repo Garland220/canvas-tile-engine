@@ -4,7 +4,7 @@ import { AccessLevel } from './user/Account';
 export function Constructable<T extends { new(...args: any[]): {} }>(target: T): any {
     return class extends target {
         ConstructLevel = AccessLevel.Player;
-    }
+    };
 }
 
 
@@ -22,5 +22,5 @@ export function AccessRequirement(accessLevel: AccessLevel) {
         target.ReadLevel = accessLevel;
 
         return descriptor;
-    }
+    };
 }

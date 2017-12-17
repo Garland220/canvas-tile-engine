@@ -46,8 +46,6 @@ export interface ISpell {
     // OnCastInTown(region: Region): boolean;
 }
 
-
-
 export interface ISpawner {
     UnlinkOnTaming: boolean;
     HomeLocation: Point3D;

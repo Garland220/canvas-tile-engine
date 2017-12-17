@@ -14,13 +14,13 @@
           "call-signature": "nospace",
           "index-signature": "nospace",
           "parameter": "nospace",
-          "property-declaration": "onespace",
-          "variable-declaration": "onespace"
+          "property-declaration": "nospace",
+          "variable-declaration": "nospace"
         },
         {
-          "call-signature": "nospace",
-          "index-signature": "nospace",
-          "parameter": "nospace",
+          "call-signature": "onespace",
+          "index-signature": "onespace",
+          "parameter": "onespace",
           "property-declaration": "onespace",
           "variable-declaration": "onespace"
         }

@@ -46,7 +46,7 @@ export class HardwareInfo {
     }
 
     public toJSON() {
-        let json:any = {};
+        let json: any = {};
 
         for (let key in this) {
             if (this.hasOwnProperty(key)) {

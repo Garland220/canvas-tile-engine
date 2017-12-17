@@ -96,7 +96,7 @@ export abstract class Entity implements IEntity {
     }
 
     public Clone(): any {
-        let cloneObj = new (<any>this.constructor());
+        let cloneObj = new (<any>this.constructor)();
         for (let attribut in this) {
             if (typeof this[attribut] === "object") {
                 cloneObj[attribut] = this.Clone();

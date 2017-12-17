@@ -71,7 +71,7 @@ export class Client {
             this.hasMemoryAPI = false;
         }
 
-        this.hardwareInfo.MemoryUsed = (<any>window.performance)['memory'] ? <number>(<any>window.performance)['memory']['usedJSHeapSize'] : null
+        this.hardwareInfo.MemoryUsed = (<any>window.performance)['memory'] ? <number>(<any>window.performance)['memory']['usedJSHeapSize'] : null;
     }
 
     public ChangeDisplaySetting(antialias: boolean = true, adaptToDeviceRatio: boolean = true): void {
