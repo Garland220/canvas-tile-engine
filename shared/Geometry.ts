@@ -492,6 +492,10 @@ export class Circle implements IShape {
         return this.radius;
     }
 
+    public get Circumference(): number {
+        return (this.radius + this.radius) * Math.PI;
+    }
+
     constructor(start: Point2D | Point3D, radius: number) {
         this.start = new Point2D(start.X, start.Y);
         this.radius = radius;
@@ -528,12 +532,13 @@ export class Sphere implements IShape {
     private start: Point3D;
     private radius: number;
 
-    public get Center(): Point3D {
-        return this.start;
-    }
 
     public get Radius(): number {
         return this.radius;
+    }
+
+    public get SurfaceArea(): number {
+        return (this.radius + this.radius) * Math.PI * 4;
     }
 
     constructor(start: Point2D | Point3D, radius: number) {
@@ -559,6 +564,7 @@ export class Sphere implements IShape {
                 json[<string>key] = this[key];
             }
         }
+
         return json;
     }
 
